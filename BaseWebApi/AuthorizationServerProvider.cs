@@ -25,7 +25,7 @@ namespace BaseWebApi
                 identity.AddClaim(new Claim(ClaimTypes.Name, "Jolasho Joseph"));
                 context.Validated(identity);
             }
-            else if (context.UserName == "admin" && context.Password == "admin")
+            else if (context.UserName == "user" && context.Password == "user")
             {
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                 identity.AddClaim(new Claim("username", "user"));
