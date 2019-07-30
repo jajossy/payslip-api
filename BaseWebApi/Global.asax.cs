@@ -14,6 +14,8 @@ namespace BaseWebApi
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            // new code for autofac
+            Bootstrapper.Run();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -168,3 +168,15 @@ E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.Web.xml
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.csprojResolveAssemblyReference.cache
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.dll
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.pdb
+E:\repository\web_api\BaseWebApi\bin\Autofac.dll
+E:\repository\web_api\BaseWebApi\bin\Autofac.Integration.WebApi.dll
+E:\repository\web_api\BaseWebApi\bin\EntityFramework.dll
+E:\repository\web_api\BaseWebApi\bin\EntityFramework.SqlServer.dll
+E:\repository\web_api\BaseWebApi\bin\NLog.dll
+E:\repository\web_api\BaseWebApi\bin\Purplelight.Framework.Autofac.Integration.WebApi.dll
+E:\repository\web_api\BaseWebApi\bin\Autofac.pdb
+E:\repository\web_api\BaseWebApi\bin\Autofac.xml
+E:\repository\web_api\BaseWebApi\bin\Autofac.Integration.WebApi.xml
+E:\repository\web_api\BaseWebApi\bin\EntityFramework.xml
+E:\repository\web_api\BaseWebApi\bin\EntityFramework.SqlServer.xml
+E:\repository\web_api\BaseWebApi\bin\NLog.xml
