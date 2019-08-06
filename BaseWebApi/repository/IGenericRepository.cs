@@ -7,6 +7,7 @@ namespace BaseWebApi.repository
 {
     public interface IGenericRepository<T> where T : class
     {
+        T Get(int id);
         IQueryable<T> GetAll();
     }
 }

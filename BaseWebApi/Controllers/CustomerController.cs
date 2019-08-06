@@ -18,7 +18,7 @@ namespace BaseWebApi.Controllers
             _customerRepository = customerRepository;
         }
 
-        public IQueryable<Customer> GetCustomerList()
+        public IQueryable<Customer> Get()
         {
             return _customerRepository.GetAll();
         }
