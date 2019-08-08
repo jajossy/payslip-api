@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SuitrohDBModelStoreContainer" CdmEntityContainer="SuitrohDBEntities">
+    <EntitySetMapping Name="ActivityTags">
+      <EntityTypeMapping TypeName="SuitrohDBModel.ActivityTag">
+        <MappingFragment StoreEntitySet="ActivityTag">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_Supplier">
+      <EntityTypeMapping TypeName="SuitrohDBModel.Audit_Supplier">
+        <MappingFragment StoreEntitySet="Audit_Supplier">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit_CompanyStockTag">
+      <EntityTypeMapping TypeName="SuitrohDBModel.Audit_CompanyStockTag">
+        <MappingFragment StoreEntitySet="Audit-CompanyStockTag">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Stockname" ColumnName="Stockname" />
+          <ScalarProperty Name="CompanyPrice" ColumnName="CompanyPrice" />
+          <ScalarProperty Name="Setdate" ColumnName="Setdate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
+          <ScalarProperty Name="CompanyStockTagId" ColumnName="CompanyStockTagId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyStockTags">
+      <EntityTypeMapping TypeName="SuitrohDBModel.CompanyStockTag">
+        <MappingFragment StoreEntitySet="CompanyStockTag">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Stockname" ColumnName="Stockname" />
+          <ScalarProperty Name="CompanyPrice" ColumnName="CompanyPrice" />
+          <ScalarProperty Name="Setdate" ColumnName="Setdate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="SuitrohDBModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrentStocks">
+      <EntityTypeMapping TypeName="SuitrohDBModel.CurrentStock">
+        <MappingFragment StoreEntitySet="CurrentStock">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="StockNameId" ColumnName="StockNameId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="SuitrohDBModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StockIns">
+      <EntityTypeMapping TypeName="SuitrohDBModel.StockIn">
+        <MappingFragment StoreEntitySet="StockIn">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="CompanyProductNameId" ColumnName="CompanyProductNameId" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="SupplierProductName" ColumnName="SupplierProductName" />
+          <ScalarProperty Name="SupplierPrice" ColumnName="SupplierPrice" />
+          <ScalarProperty Name="CompanySetPrice" ColumnName="CompanySetPrice" />
+          <ScalarProperty Name="QuantitySupplied" ColumnName="QuantitySupplied" />
+          <ScalarProperty Name="DateSupplied" ColumnName="DateSupplied" />
+          <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+          <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="SuitrohDBModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SuitrohDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

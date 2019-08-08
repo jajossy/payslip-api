@@ -9,8 +9,11 @@ namespace BaseWebApi.Models
     public class DbFactory : IDbFactory
     {
         northwindEntities dbContext;
+        //SuitrohDBEntities dbContext;
         public northwindEntities Init()
+        //public SuitrohDBEntities Init()
         {
+            //return dbContext ?? (dbContext = new SuitrohDBEntities());
             return dbContext ?? (dbContext = new northwindEntities());
         }
     }

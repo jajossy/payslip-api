@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SuitrohDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ActivityTag">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Audit_Supplier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="Region" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUser" Type="Guid" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="SupplierId" Type="Guid" Nullable="false" />
+    <Property Name="ActivityStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Audit_Supplier_Country" FromRole="Audit_Supplier" ToRole="Country" />
+    <NavigationProperty Name="State" Relationship="Self.FK_Audit_Supplier_State" FromRole="Audit_Supplier" ToRole="State" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_Audit_Supplier_Supplier" FromRole="Audit_Supplier" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Audit_CompanyStockTag">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="Stockname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyPrice" Type="Double" Nullable="false" />
+    <Property Name="Setdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedUser" Type="Guid" />
+    <Property Name="ActivityStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyStockTagId" Type="Guid" />
+    <NavigationProperty Name="CompanyStockTag" Relationship="Self.FK_Audit_CompanyStockTag_CompanyStockTag" FromRole="Audit_CompanyStockTag" ToRole="CompanyStockTag" />
+  </EntityType>
+  <EntityType Name="CompanyStockTag">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="Stockname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyPrice" Type="Double" Nullable="false" />
+    <Property Name="Setdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedUser" Type="Guid" />
+    <NavigationProperty Name="Audit_CompanyStockTag" Relationship="Self.FK_Audit_CompanyStockTag_CompanyStockTag" FromRole="CompanyStockTag" ToRole="Audit_CompanyStockTag" />
+    <NavigationProperty Name="CurrentStocks" Relationship="Self.FK_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="CurrentStock" />
+    <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_CompanyStockTag" FromRole="CompanyStockTag" ToRole="StockIn" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Audit_Supplier" Relationship="Self.FK_Audit_Supplier_Country" FromRole="Country" ToRole="Audit_Supplier" />
+    <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_Country" FromRole="Country" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="CurrentStock">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="StockNameId" Type="Guid" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="PackUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CompanyStockTag" Relationship="Self.FK_CurrentStock_CompanyStockTag" FromRole="CurrentStock" ToRole="CompanyStockTag" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Audit_Supplier" Relationship="Self.FK_Audit_Supplier_State" FromRole="State" ToRole="Audit_Supplier" />
+    <NavigationProperty Name="Suppliers" Relationship="Self.FK_Supplier_State" FromRole="State" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="StockIn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="CompanyProductNameId" Type="Guid" Nullable="false" />
+    <Property Name="SupplierId" Type="Guid" Nullable="false" />
+    <Property Name="SupplierProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SupplierPrice" Type="Double" />
+    <Property Name="CompanySetPrice" Type="Double" Nullable="false" />
+    <Property Name="QuantitySupplied" Type="Int32" Nullable="false" />
+    <Property Name="DateSupplied" Type="DateTime" Precision="3" />
+    <Property Name="PackUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedUser" Type="Guid" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="CompanyStockTag" Relationship="Self.FK_StockIn_CompanyStockTag" FromRole="StockIn" ToRole="CompanyStockTag" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Region" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUser" Type="Guid" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Audit_Supplier" Relationship="Self.FK_Audit_Supplier_Supplier" FromRole="Supplier" ToRole="Audit_Supplier" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Supplier_Country" FromRole="Supplier" ToRole="Country" />
+    <NavigationProperty Name="State" Relationship="Self.FK_Supplier_State" FromRole="Supplier" ToRole="State" />
+    <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_Supplier" FromRole="Supplier" ToRole="StockIn" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Audit_Supplier_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Audit_Supplier" Type="Self.Audit_Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Audit_Supplier">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Audit_Supplier_State">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Audit_Supplier" Type="Self.Audit_Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Audit_Supplier">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Audit_Supplier_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Audit_Supplier" Type="Self.Audit_Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Audit_Supplier">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Audit_CompanyStockTag_CompanyStockTag">
+    <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="0..1" />
+    <End Role="Audit_CompanyStockTag" Type="Self.Audit_CompanyStockTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyStockTag">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Audit_CompanyStockTag">
+        <PropertyRef Name="CompanyStockTagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrentStock_CompanyStockTag">
+    <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="1" />
+    <End Role="CurrentStock" Type="Self.CurrentStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyStockTag">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CurrentStock">
+        <PropertyRef Name="StockNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_CompanyStockTag">
+    <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="1" />
+    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyStockTag">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="CompanyProductNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplier_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supplier_State">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SuitrohDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ActivityTags" EntityType="Self.ActivityTag" />
+    <EntitySet Name="Audit_Supplier" EntityType="Self.Audit_Supplier" />
+    <EntitySet Name="Audit_CompanyStockTag" EntityType="Self.Audit_CompanyStockTag" />
+    <EntitySet Name="CompanyStockTags" EntityType="Self.CompanyStockTag" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="CurrentStocks" EntityType="Self.CurrentStock" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="StockIns" EntityType="Self.StockIn" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Audit_Supplier_Country" Association="Self.FK_Audit_Supplier_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Audit_Supplier_State" Association="Self.FK_Audit_Supplier_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Audit_Supplier_Supplier" Association="Self.FK_Audit_Supplier_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Audit_CompanyStockTag_CompanyStockTag" Association="Self.FK_Audit_CompanyStockTag_CompanyStockTag">
+      <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+      <End Role="Audit_CompanyStockTag" EntitySet="Audit_CompanyStockTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrentStock_CompanyStockTag" Association="Self.FK_CurrentStock_CompanyStockTag">
+      <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+      <End Role="CurrentStock" EntitySet="CurrentStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_CompanyStockTag" Association="Self.FK_StockIn_CompanyStockTag">
+      <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplier_Country" Association="Self.FK_Supplier_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Supplier" EntitySet="Suppliers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supplier_State" Association="Self.FK_Supplier_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="Supplier" EntitySet="Suppliers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Supplier" Association="Self.FK_StockIn_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

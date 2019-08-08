@@ -232,6 +232,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="dbFactory\DbFactory.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>sampleModel.tt</DependentUpon>
     </Compile>
@@ -244,7 +245,6 @@
     <Compile Include="Models\CustomerDemographic.cs">
       <DependentUpon>sampleModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbFactory.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>sampleModel.tt</DependentUpon>
     </Compile>
@@ -301,8 +301,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\sampleModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>sampleModel.Context.cs</LastGenOutput>
       <DependentUpon>sampleModel.edmx</DependentUpon>
+      <LastGenOutput>sampleModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\sampleModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

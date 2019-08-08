@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -24,8 +25,14 @@ namespace BaseWebApi
             var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
             config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
 
-            var cors = new EnableCorsAttribute("*", "*", "*");//origins,headers,methods   
+            
+            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");//origins,headers,methods   
             config.EnableCors(cors);
+
+            // Code to deal with self referencing loop detected for property in web api
+            GlobalConfiguration.Configuration.Formatters
+                   .JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling
+                   = ReferenceLoopHandling.Ignore;
         }
     }
 }
