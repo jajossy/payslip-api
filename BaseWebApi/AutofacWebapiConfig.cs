@@ -33,7 +33,7 @@ namespace BaseWebApi
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.RegisterType<northwindEntities>()
+            builder.RegisterType<SuitrohDBEntities>()
                 .As<DbContext>()
                 .InstancePerRequest();
 

@@ -12,8 +12,8 @@ namespace BaseWebApi.repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private northwindEntities dbContext;
-        //private SuitrohDBEntities dbContext;
+        //private northwindEntities dbContext;
+        private SuitrohDBEntities dbContext;
 
         protected IDbFactory DbFactory
         {
@@ -21,8 +21,8 @@ namespace BaseWebApi.repository
             private set;
         }
 
-        protected northwindEntities DbContext
-        //protected SuitrohDBEntities DbContext
+        //protected northwindEntities DbContext
+        protected SuitrohDBEntities DbContext
         {
             get { return dbContext ?? (dbContext = DbFactory.Init()); }
         }
@@ -32,7 +32,7 @@ namespace BaseWebApi.repository
             DbFactory = dbFactory;
         }
 
-        public T Get(int id)
+        public T GetById(Guid id)
         {
             return DbContext.Set<T>().Find(id);
         }
@@ -47,9 +47,20 @@ namespace BaseWebApi.repository
             return DbContext.Set<T>().SingleOrDefault(predicate);
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> GetAll(params Expression<Func<T, object>>[] includeExpressions)
         {
-            return DbContext.Set<T>();
+            IDbSet<T> dbSet = DbContext.Set<T>();
+
+            //IQueryable<T> query = null;
+            IQueryable<T> query = dbSet.Include(includeExpressions[0]);
+            foreach (var includeExpression in includeExpressions.Skip(1))
+            {
+                //query = dbSet.Include(includeExpression);
+                query = query.Include(includeExpression);
+            }
+
+            return query ?? dbSet;
+            //return DbContext.Set<T>();            
         }
 
         public T Add(T entity)
@@ -89,5 +100,19 @@ namespace BaseWebApi.repository
                 }
             }
         }
+
+        /*public IQueryable<T> Include(params Expression<Func<T, object>>[] includeExpressions)
+        {
+            IDbSet<T> dbSet = DbContext.Set<T>();
+
+            IQueryable<T> query = null;
+            foreach (var includeExpression in includeExpressions)
+            {
+                query = dbSet.Include(includeExpression);
+            }
+
+            return query ?? dbSet;
+        }*/
+
     }
 }

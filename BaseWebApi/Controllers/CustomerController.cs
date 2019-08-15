@@ -11,7 +11,7 @@ namespace BaseWebApi.Controllers
 {
     public class CustomerController : ApiController
     {
-        private readonly IGenericRepository<Customer> _customerRepository;
+        /*private readonly IGenericRepository<Customer> _customerRepository;
 
         public CustomerController(IGenericRepository<Customer> customerRepository)
         {
@@ -21,6 +21,6 @@ namespace BaseWebApi.Controllers
         public IQueryable<Customer> Get()
         {
             return _customerRepository.GetAll();
-        }
+        }*/
     }
 }

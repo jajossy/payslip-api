@@ -12,15 +12,9 @@ namespace BaseWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order_Detail
+    public partial class ActivityTag
     {
-        public int OrderID { get; set; }
-        public int ProductID { get; set; }
-        public decimal UnitPrice { get; set; }
-        public short Quantity { get; set; }
-        public float Discount { get; set; }
-    
-        public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
+        public int id { get; set; }
+        public string Description { get; set; }
     }
 }

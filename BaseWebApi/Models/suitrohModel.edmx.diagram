@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1fd0bc428e734136874cb338ac969c16" Name="Diagram1">
+        <EntityTypeShape EntityType="SuitrohDBModel.ActivityTag" Width="1.5" PointX="2.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuitrohDBModel.Audit_Supplier" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuitrohDBModel.Country" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuitrohDBModel.CurrentStock" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuitrohDBModel.State" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuitrohDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="SuitrohDBModel.FK_Audit_Supplier_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SuitrohDBModel.FK_Audit_Supplier_State" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SuitrohDBModel.Supplier" Width="1.5" PointX="6" PointY="4.5" />
+        <AssociationConnector Association="SuitrohDBModel.FK_Audit_Supplier_Supplier" />
+        <AssociationConnector Association="SuitrohDBModel.FK_Supplier_Country" />
+        <AssociationConnector Association="SuitrohDBModel.FK_Supplier_State" />
+        <EntityTypeShape EntityType="SuitrohDBModel.Audit_CompanyStockTag" Width="1.5" PointX="8.25" PointY="13.625" />
+        <EntityTypeShape EntityType="SuitrohDBModel.CompanyStockTag" Width="1.5" PointX="6" PointY="9.625" />
+        <AssociationConnector Association="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag" />
+        <AssociationConnector Association="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" />
+        <EntityTypeShape EntityType="SuitrohDBModel.StockIn" Width="1.5" PointX="8.25" PointY="5.625" />
+        <AssociationConnector Association="SuitrohDBModel.FK_StockIn_CompanyStockTag" />
+        <AssociationConnector Association="SuitrohDBModel.FK_StockIn_Supplier" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

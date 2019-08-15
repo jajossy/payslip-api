@@ -12,23 +12,25 @@ namespace BaseWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Contact
+    public partial class Audit_Supplier
     {
-        public int ContactID { get; set; }
-        public string ContactType { get; set; }
+        public System.Guid id { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
         public string Address { get; set; }
-        public string City { get; set; }
+        public Nullable<int> CountryId { get; set; }
+        public Nullable<int> StateId { get; set; }
         public string Region { get; set; }
-        public string PostalCode { get; set; }
-        public string Country { get; set; }
         public string Phone { get; set; }
-        public string Extension { get; set; }
-        public string Fax { get; set; }
-        public string HomePage { get; set; }
-        public string PhotoPath { get; set; }
-        public byte[] Photo { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public System.Guid SupplierId { get; set; }
+        public string ActivityStatus { get; set; }
+    
+        public virtual Country Country { get; set; }
+        public virtual State State { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

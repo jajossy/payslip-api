@@ -7,6 +7,19 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="Audit_CompanyStockTag">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Stockname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompanyPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="Setdate" Type="date" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedUser" Type="uniqueidentifier" />
+    <Property Name="ActivityStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="CompanyStockTagId" Type="uniqueidentifier" />
+  </EntityType>
   <EntityType Name="Audit_Supplier">
     <Key>
       <PropertyRef Name="id" />
@@ -26,26 +39,13 @@
     <Property Name="SupplierId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ActivityStatus" Type="nvarchar" MaxLength="20" />
   </EntityType>
-  <EntityType Name="Audit-CompanyStockTag">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Stockname" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="CompanyPrice" Type="float" Nullable="false" />
-    <Property Name="Setdate" Type="date" Nullable="false" />
-    <Property Name="Comment" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedUser" Type="uniqueidentifier" />
-    <Property Name="ActivityStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="CompanyStockTagId" Type="uniqueidentifier" />
-  </EntityType>
   <EntityType Name="CompanyStockTag">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Stockname" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="CompanyPrice" Type="float" Nullable="false" />
+    <Property Name="CompanyPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
     <Property Name="Setdate" Type="date" Nullable="false" />
     <Property Name="Comment" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedUser" Type="uniqueidentifier" />
@@ -85,13 +85,13 @@
     <Property Name="CompanyProductNameId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SupplierId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SupplierProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="SupplierPrice" Type="float" />
-    <Property Name="CompanySetPrice" Type="float" Nullable="false" />
+    <Property Name="SuppliedPrice" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="UnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
     <Property Name="QuantitySupplied" Type="int" Nullable="false" />
-    <Property Name="DateSupplied" Type="datetime" />
+    <Property Name="DateSupplied" Type="datetime" Nullable="false" />
     <Property Name="PackUnit" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="BatchNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedUser" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreatedUser" Type="uniqueidentifier" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Supplier">
@@ -104,7 +104,7 @@
     <Property Name="ContactTitle" Type="nvarchar" MaxLength="30" />
     <Property Name="Address" Type="nvarchar" MaxLength="60" />
     <Property Name="CountryId" Type="int" />
-    <Property Name="CityId" Type="int" />
+    <Property Name="StateId" Type="int" />
     <Property Name="Region" Type="nvarchar" MaxLength="40" />
     <Property Name="Phone" Type="nvarchar" MaxLength="24" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
@@ -159,12 +159,12 @@
   </Association>
   <Association Name="FK_Audit-CompanyStockTag_CompanyStockTag">
     <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="0..1" />
-    <End Role="Audit-CompanyStockTag" Type="Self.Audit-CompanyStockTag" Multiplicity="*" />
+    <End Role="Audit_CompanyStockTag" Type="Self.Audit_CompanyStockTag" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CompanyStockTag">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Audit-CompanyStockTag">
+      <Dependent Role="Audit_CompanyStockTag">
         <PropertyRef Name="CompanyStockTagId" />
       </Dependent>
     </ReferentialConstraint>
@@ -225,14 +225,14 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Supplier">
-        <PropertyRef Name="CityId" />
+        <PropertyRef Name="StateId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="SuitrohDBModelStoreContainer">
     <EntitySet Name="ActivityTag" EntityType="Self.ActivityTag" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Audit_CompanyStockTag" EntityType="Self.Audit_CompanyStockTag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Audit_Supplier" EntityType="Self.Audit_Supplier" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Audit-CompanyStockTag" EntityType="Self.Audit-CompanyStockTag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompanyStockTag" EntityType="Self.CompanyStockTag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CurrentStock" EntityType="Self.CurrentStock" Schema="dbo" store:Type="Tables" />
@@ -254,7 +254,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_Audit-CompanyStockTag_CompanyStockTag" Association="Self.FK_Audit-CompanyStockTag_CompanyStockTag">
       <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />
-      <End Role="Audit-CompanyStockTag" EntitySet="Audit-CompanyStockTag" />
+      <End Role="Audit_CompanyStockTag" EntitySet="Audit_CompanyStockTag" />
     </AssociationSet>
     <AssociationSet Name="FK_CurrentStock_CompanyStockTag" Association="Self.FK_CurrentStock_CompanyStockTag">
       <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />

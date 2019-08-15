@@ -12,32 +12,27 @@ namespace BaseWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Supplier
+    public partial class CompanyStockTag
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Supplier()
+        public CompanyStockTag()
         {
-            this.Audit_Supplier = new HashSet<Audit_Supplier>();
+            this.Audit_CompanyStockTag = new HashSet<Audit_CompanyStockTag>();
+            this.CurrentStocks = new HashSet<CurrentStock>();
             this.StockIns = new HashSet<StockIn>();
         }
     
         public System.Guid id { get; set; }
-        public string CompanyName { get; set; }
-        public string ContactName { get; set; }
-        public string ContactTitle { get; set; }
-        public string Address { get; set; }
-        public Nullable<int> CountryId { get; set; }
-        public Nullable<int> StateId { get; set; }
-        public string Region { get; set; }
-        public string Phone { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.Guid CreatedUser { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public string Stockname { get; set; }
+        public decimal CompanyPrice { get; set; }
+        public System.DateTime Setdate { get; set; }
+        public string Comment { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Audit_Supplier> Audit_Supplier { get; set; }
-        public virtual Country Country { get; set; }
-        public virtual State State { get; set; }
+        public virtual ICollection<Audit_CompanyStockTag> Audit_CompanyStockTag { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CurrentStock> CurrentStocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
     }

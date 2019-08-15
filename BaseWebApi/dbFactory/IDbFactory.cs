@@ -8,7 +8,7 @@ namespace BaseWebApi.dbFactory
 {
     public interface IDbFactory
     {
-        northwindEntities Init();
-        //SuitrohDBEntities Init();
+        //northwindEntities Init();
+        SuitrohDBEntities Init();
     }
 }

@@ -13,10 +13,10 @@ namespace BaseWebApi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class northwindEntities : DbContext
+    public partial class SuitrohDBEntities : DbContext
     {
-        public northwindEntities()
-            : base("name=northwindEntities")
+        public SuitrohDBEntities()
+            : base("name=SuitrohDBEntities")
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
@@ -27,18 +27,15 @@ namespace BaseWebApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
-        public virtual DbSet<CustomerDemographic> CustomerDemographics { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Order_Detail> Order_Details { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Region> Regions { get; set; }
-        public virtual DbSet<Shipper> Shippers { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<ActivityTag> ActivityTags { get; set; }
+        public virtual DbSet<Audit_Supplier> Audit_Supplier { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<CurrentStock> CurrentStocks { get; set; }
+        public virtual DbSet<State> States { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Territory> Territories { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Audit_CompanyStockTag> Audit_CompanyStockTag { get; set; }
+        public virtual DbSet<CompanyStockTag> CompanyStockTags { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
     }
 }

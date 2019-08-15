@@ -223,9 +223,13 @@
     <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="AutofacWebapiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\StockinController.cs" />
+    <Compile Include="Controllers\StockTagController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="dbFactory\IDbFactory.cs" />
@@ -233,59 +237,50 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="dbFactory\DbFactory.cs" />
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\ActivityTag.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Contact.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\Audit_CompanyStockTag.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Customer.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\Audit_Supplier.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerDemographic.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\CompanyStockTag.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Employee.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\CurrentStock.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Order_Detail.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\State.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+    <Compile Include="Models\StockIn.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Region.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sampleModel.Context.cs">
+    <Compile Include="Models\suitrohModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sampleModel.Context.tt</DependentUpon>
+      <DependentUpon>suitrohModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sampleModel.cs">
+    <Compile Include="Models\suitrohModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sampleModel.tt</DependentUpon>
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sampleModel.Designer.cs">
+    <Compile Include="Models\suitrohModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sampleModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Shipper.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+      <DependentUpon>suitrohModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Territory.cs">
-      <DependentUpon>sampleModel.tt</DependentUpon>
+      <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="repository\GenericRepository.cs" />
@@ -299,15 +294,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\sampleModel.Context.tt">
+    <Content Include="Models\suitrohModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sampleModel.edmx</DependentUpon>
-      <LastGenOutput>sampleModel.Context.cs</LastGenOutput>
+      <DependentUpon>suitrohModel.edmx</DependentUpon>
+      <LastGenOutput>suitrohModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sampleModel.tt">
+    <Content Include="Models\suitrohModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sampleModel.edmx</DependentUpon>
-      <LastGenOutput>sampleModel.cs</LastGenOutput>
+      <DependentUpon>suitrohModel.edmx</DependentUpon>
+      <LastGenOutput>suitrohModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -333,12 +328,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\sampleModel.edmx">
+    <EntityDeploy Include="Models\suitrohModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sampleModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>suitrohModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\sampleModel.edmx.diagram">
-      <DependentUpon>sampleModel.edmx</DependentUpon>
+    <Content Include="Models\suitrohModel.edmx.diagram">
+      <DependentUpon>suitrohModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
