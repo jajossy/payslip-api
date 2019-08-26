@@ -25,6 +25,39 @@
           <Property Name="ActivityStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="CompanyStockTagId" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="Audit_CurrentStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StocknameId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="PackUnit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="CompanyUnitPrice" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="DateEntered" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Audit_StockIn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StockInId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SupplierId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QuantitySupplied" Type="int" Nullable="false" />
+          <Property Name="SuppliedPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DateSupplied" Type="datetime" Nullable="false" />
+          <Property Name="PackUnit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BatchNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ActivityStatus" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="Audit_Supplier">
           <Key>
             <PropertyRef Name="id" />
@@ -69,10 +102,137 @@
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StockNameId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ReorderLevel" Type="int" />
           <Property Name="PackUnit" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="CompanyUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SupplierUnitPrice" Type="decimal" Precision="12" Scale="2" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Storename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Zone" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarketPlace" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="40" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="40" />
+          <Property Name="Othernames" Type="nvarchar" MaxLength="50" />
+          <Property Name="GenderId" Type="uniqueidentifier" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustomerEmail" Type="nvarchar" MaxLength="40" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldAgent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Othernames" Type="nvarchar" MaxLength="50" />
+          <Property Name="GenderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AllocatedZone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AgentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="Pending" Type="bit" />
+          <Property Name="Cancelled" Type="bit" />
+          <Property Name="TotalOrderAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TotalSuppliedAmount" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order_Audit_CurrentStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StocknameId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="PackUnit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="CompanyUnitPrice" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="DateEntered" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order_CurrentStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StockNameId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ReorderLevel" Type="int" Nullable="false" />
+          <Property Name="PackUnit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SupplierUnitPrice" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProductId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="SalesUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SalesTotalAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatchNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="SuppliedUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SuppliedTotalPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AmountCollected" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="CollectorId" Type="uniqueidentifier" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SaleReport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SaleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AmountCollected" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SuppliedAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ProfitMade" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -98,6 +258,7 @@
           <Property Name="BatchNo" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedUser" Type="uniqueidentifier" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -126,6 +287,30 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Audit_StockIn_StockIn">
+          <End Role="StockIn" Type="Self.StockIn" Multiplicity="1" />
+          <End Role="Audit_StockIn" Type="Self.Audit_StockIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockIn">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_StockIn">
+              <PropertyRef Name="StockInId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Audit_StockIn_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Audit_StockIn" Type="Self.Audit_StockIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_StockIn">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Audit_Supplier_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Audit_Supplier" Type="Self.Audit_Supplier" Multiplicity="*" />
@@ -186,6 +371,126 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customer_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_State">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldAgent_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="FieldAgent" Type="Self.FieldAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FieldAgent">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldAgent_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="FieldAgent" Type="Self.FieldAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FieldAgent">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldAgent_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="FieldAgent" Type="Self.FieldAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FieldAgent">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_CurrentStock_CompanyStockTag">
+          <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="1" />
+          <End Role="Order_CurrentStock" Type="Self.Order_CurrentStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyStockTag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order_CurrentStock">
+              <PropertyRef Name="StockNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_CompanyStockTag">
+          <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyStockTag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleReport_Sale">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
+          <End Role="SaleReport" Type="Self.SaleReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SaleReport">
+              <PropertyRef Name="SaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StockIn_CompanyStockTag">
           <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="1" />
           <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
@@ -237,14 +542,33 @@
         <EntityContainer Name="SuitrohDBModelStoreContainer">
           <EntitySet Name="ActivityTag" EntityType="Self.ActivityTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Audit_CompanyStockTag" EntityType="Self.Audit_CompanyStockTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Audit_CurrentStock" EntityType="Self.Audit_CurrentStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Audit_StockIn" EntityType="Self.Audit_StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Audit_Supplier" EntityType="Self.Audit_Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyStockTag" EntityType="Self.CompanyStockTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CurrentStock" EntityType="Self.CurrentStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldAgent" EntityType="Self.FieldAgent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Audit_CurrentStock" EntityType="Self.Order_Audit_CurrentStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_CurrentStock" EntityType="Self.Order_CurrentStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleReport" EntityType="Self.SaleReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Audit_StockIn_StockIn" Association="Self.FK_Audit_StockIn_StockIn">
+            <End Role="StockIn" EntitySet="StockIn" />
+            <End Role="Audit_StockIn" EntitySet="Audit_StockIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Audit_StockIn_Supplier" Association="Self.FK_Audit_StockIn_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Audit_StockIn" EntitySet="Audit_StockIn" />
+          </AssociationSet>
           <AssociationSet Name="FK_Audit_Supplier_Country" Association="Self.FK_Audit_Supplier_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
@@ -264,6 +588,46 @@
           <AssociationSet Name="FK_CurrentStock_CompanyStockTag" Association="Self.FK_CurrentStock_CompanyStockTag">
             <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />
             <End Role="CurrentStock" EntitySet="CurrentStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Country" Association="Self.FK_Customer_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_State" Association="Self.FK_Customer_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldAgent_Country" Association="Self.FK_FieldAgent_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="FieldAgent" EntitySet="FieldAgent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldAgent_Gender" Association="Self.FK_FieldAgent_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="FieldAgent" EntitySet="FieldAgent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldAgent_State" Association="Self.FK_FieldAgent_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="FieldAgent" EntitySet="FieldAgent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_CurrentStock_CompanyStockTag" Association="Self.FK_Order_CurrentStock_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />
+            <End Role="Order_CurrentStock" EntitySet="Order_CurrentStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_CompanyStockTag" Association="Self.FK_OrderItems_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_Order" Association="Self.FK_OrderItems_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Order" Association="Self.FK_Sale_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleReport_Sale" Association="Self.FK_SaleReport_Sale">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="SaleReport" EntitySet="SaleReport" />
           </AssociationSet>
           <AssociationSet Name="FK_StockIn_CompanyStockTag" Association="Self.FK_StockIn_CompanyStockTag">
             <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />
@@ -286,12 +650,163 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SuitrohDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="SuitrohDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="ActivityTags" EntityType="SuitrohDBModel.ActivityTag" />
+          <EntitySet Name="Audit_CompanyStockTag" EntityType="SuitrohDBModel.Audit_CompanyStockTag" />
+          <EntitySet Name="Audit_StockIn" EntityType="SuitrohDBModel.Audit_StockIn" />
+          <EntitySet Name="Audit_Supplier" EntityType="SuitrohDBModel.Audit_Supplier" />
+          <EntitySet Name="CompanyStockTags" EntityType="SuitrohDBModel.CompanyStockTag" />
+          <EntitySet Name="Countries" EntityType="SuitrohDBModel.Country" />
+          <EntitySet Name="Customers" EntityType="SuitrohDBModel.Customer" />
+          <EntitySet Name="FieldAgents" EntityType="SuitrohDBModel.FieldAgent" />
+          <EntitySet Name="Orders" EntityType="SuitrohDBModel.Order" />
+          <EntitySet Name="OrderItems" EntityType="SuitrohDBModel.OrderItem" />
+          <EntitySet Name="Sales" EntityType="SuitrohDBModel.Sale" />
+          <EntitySet Name="SaleReports" EntityType="SuitrohDBModel.SaleReport" />
+          <EntitySet Name="States" EntityType="SuitrohDBModel.State" />
+          <EntitySet Name="StockIns" EntityType="SuitrohDBModel.StockIn" />
+          <EntitySet Name="Suppliers" EntityType="SuitrohDBModel.Supplier" />
+          <AssociationSet Name="FK_Audit_CompanyStockTag_CompanyStockTag" Association="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+            <End Role="Audit_CompanyStockTag" EntitySet="Audit_CompanyStockTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Audit_StockIn_StockIn" Association="SuitrohDBModel.FK_Audit_StockIn_StockIn">
+            <End Role="StockIn" EntitySet="StockIns" />
+            <End Role="Audit_StockIn" EntitySet="Audit_StockIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Audit_StockIn_Supplier" Association="SuitrohDBModel.FK_Audit_StockIn_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Audit_StockIn" EntitySet="Audit_StockIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Audit_Supplier_Country" Association="SuitrohDBModel.FK_Audit_Supplier_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Audit_Supplier_State" Association="SuitrohDBModel.FK_Audit_Supplier_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Audit_Supplier_Supplier" Association="SuitrohDBModel.FK_Audit_Supplier_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_CompanyStockTag" Association="SuitrohDBModel.FK_OrderItems_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockIn_CompanyStockTag" Association="SuitrohDBModel.FK_StockIn_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+            <End Role="StockIn" EntitySet="StockIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Country" Association="SuitrohDBModel.FK_Customer_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldAgent_Country" Association="SuitrohDBModel.FK_FieldAgent_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="FieldAgent" EntitySet="FieldAgents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_Country" Association="SuitrohDBModel.FK_Supplier_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_State" Association="SuitrohDBModel.FK_Customer_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FieldAgent_State" Association="SuitrohDBModel.FK_FieldAgent_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="FieldAgent" EntitySet="FieldAgents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_Order" Association="SuitrohDBModel.FK_OrderItems_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Order" Association="SuitrohDBModel.FK_Sale_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleReport_Sale" Association="SuitrohDBModel.FK_SaleReport_Sale">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SaleReport" EntitySet="SaleReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supplier_State" Association="SuitrohDBModel.FK_Supplier_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockIn_Supplier" Association="SuitrohDBModel.FK_StockIn_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="StockIn" EntitySet="StockIns" />
+          </AssociationSet>
+          <EntitySet Name="Audit_CurrentStock" EntityType="SuitrohDBModel.Audit_CurrentStock" />
+          <EntitySet Name="CurrentStocks" EntityType="SuitrohDBModel.CurrentStock" />
+          <AssociationSet Name="FK_CurrentStock_CompanyStockTag" Association="SuitrohDBModel.FK_CurrentStock_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+            <End Role="CurrentStock" EntitySet="CurrentStocks" />
+          </AssociationSet>
+          <EntitySet Name="Order_Audit_CurrentStock" EntityType="SuitrohDBModel.Order_Audit_CurrentStock" />
+          <EntitySet Name="Order_CurrentStock" EntityType="SuitrohDBModel.Order_CurrentStock" />
+          <AssociationSet Name="FK_Order_CurrentStock_CompanyStockTag" Association="SuitrohDBModel.FK_Order_CurrentStock_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+            <End Role="Order_CurrentStock" EntitySet="Order_CurrentStock" />
+          </AssociationSet>
+          <EntitySet Name="Genders" EntityType="SuitrohDBModel.Gender" />
+          <AssociationSet Name="FK_FieldAgent_Gender" Association="SuitrohDBModel.FK_FieldAgent_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="FieldAgent" EntitySet="FieldAgents" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="ActivityTag">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Audit_CompanyStockTag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="Stockname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Setdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="ActivityStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyStockTagId" Type="Guid" />
+          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag" FromRole="Audit_CompanyStockTag" ToRole="CompanyStockTag" />
+        </EntityType>
+        <EntityType Name="Audit_StockIn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StockInId" Type="Guid" Nullable="false" />
+          <Property Name="SupplierId" Type="Guid" Nullable="false" />
+          <Property Name="QuantitySupplied" Type="Int32" Nullable="false" />
+          <Property Name="SuppliedPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="DateSupplied" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PackUnit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ActivityStatus" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StockIn" Relationship="SuitrohDBModel.FK_Audit_StockIn_StockIn" FromRole="Audit_StockIn" ToRole="StockIn" />
+          <NavigationProperty Name="Supplier" Relationship="SuitrohDBModel.FK_Audit_StockIn_Supplier" FromRole="Audit_StockIn" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="Audit_Supplier">
           <Key>
@@ -311,194 +826,9 @@
           <Property Name="Status" Type="Boolean" />
           <Property Name="SupplierId" Type="Guid" Nullable="false" />
           <Property Name="ActivityStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Audit_Supplier_Country" FromRole="Audit_Supplier" ToRole="Country" />
-          <NavigationProperty Name="State" Relationship="Self.FK_Audit_Supplier_State" FromRole="Audit_Supplier" ToRole="State" />
+          <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_Audit_Supplier_Country" FromRole="Audit_Supplier" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_Audit_Supplier_State" FromRole="Audit_Supplier" ToRole="State" />
           <NavigationProperty Name="Supplier" Relationship="SuitrohDBModel.FK_Audit_Supplier_Supplier" FromRole="Audit_Supplier" ToRole="Supplier" />
-        </EntityType>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Audit_Supplier" Relationship="Self.FK_Audit_Supplier_Country" FromRole="Country" ToRole="Audit_Supplier" />
-          <NavigationProperty Name="Suppliers" Relationship="SuitrohDBModel.FK_Supplier_Country" FromRole="Country" ToRole="Supplier" />
-        </EntityType>
-        <EntityType Name="CurrentStock">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="StockNameId" Type="Guid" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="PackUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" FromRole="CurrentStock" ToRole="CompanyStockTag" />
-        </EntityType>
-        <EntityType Name="State">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CountryId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Audit_Supplier" Relationship="Self.FK_Audit_Supplier_State" FromRole="State" ToRole="Audit_Supplier" />
-          <NavigationProperty Name="Suppliers" Relationship="SuitrohDBModel.FK_Supplier_State" FromRole="State" ToRole="Supplier" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_Audit_Supplier_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="Audit_Supplier" Type="Self.Audit_Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Audit_Supplier">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Audit_Supplier_State">
-          <End Role="State" Type="Self.State" Multiplicity="0..1" />
-          <End Role="Audit_Supplier" Type="Self.Audit_Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Audit_Supplier">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SuitrohDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ActivityTags" EntityType="Self.ActivityTag" />
-          <EntitySet Name="Audit_Supplier" EntityType="Self.Audit_Supplier" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="CurrentStocks" EntityType="Self.CurrentStock" />
-          <EntitySet Name="States" EntityType="Self.State" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_Audit_Supplier_Country" Association="Self.FK_Audit_Supplier_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Audit_Supplier_State" Association="Self.FK_Audit_Supplier_State">
-            <End Role="State" EntitySet="States" />
-            <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
-          </AssociationSet>
-          <EntitySet Name="Suppliers" EntityType="SuitrohDBModel.Supplier" />
-          <AssociationSet Name="FK_Audit_Supplier_Supplier" Association="SuitrohDBModel.FK_Audit_Supplier_Supplier">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supplier_Country" Association="SuitrohDBModel.FK_Supplier_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Supplier" EntitySet="Suppliers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supplier_State" Association="SuitrohDBModel.FK_Supplier_State">
-            <End Role="State" EntitySet="States" />
-            <End Role="Supplier" EntitySet="Suppliers" />
-          </AssociationSet>
-          <EntitySet Name="Audit_CompanyStockTag" EntityType="SuitrohDBModel.Audit_CompanyStockTag" />
-          <EntitySet Name="CompanyStockTags" EntityType="SuitrohDBModel.CompanyStockTag" />
-          <AssociationSet Name="FK_Audit_CompanyStockTag_CompanyStockTag" Association="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag">
-            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
-            <End Role="Audit_CompanyStockTag" EntitySet="Audit_CompanyStockTag" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CurrentStock_CompanyStockTag" Association="SuitrohDBModel.FK_CurrentStock_CompanyStockTag">
-            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
-            <End Role="CurrentStock" EntitySet="CurrentStocks" />
-          </AssociationSet>
-          <EntitySet Name="StockIns" EntityType="SuitrohDBModel.StockIn" />
-          <AssociationSet Name="FK_StockIn_CompanyStockTag" Association="SuitrohDBModel.FK_StockIn_CompanyStockTag">
-            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
-            <End Role="StockIn" EntitySet="StockIns" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StockIn_Supplier" Association="SuitrohDBModel.FK_StockIn_Supplier">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="StockIn" EntitySet="StockIns" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="Supplier">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="StateId" Type="Int32" />
-          <Property Name="Region" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedUser" Type="Guid" Nullable="false" />
-          <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Audit_Supplier" Relationship="SuitrohDBModel.FK_Audit_Supplier_Supplier" FromRole="Supplier" ToRole="Audit_Supplier" />
-          <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_Supplier_Country" FromRole="Supplier" ToRole="Country" />
-          <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_Supplier_State" FromRole="Supplier" ToRole="State" />
-          <NavigationProperty Name="StockIns" Relationship="SuitrohDBModel.FK_StockIn_Supplier" FromRole="Supplier" ToRole="StockIn" />
-        </EntityType>
-        <Association Name="FK_Audit_Supplier_Supplier">
-          <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="1" />
-          <End Type="SuitrohDBModel.Audit_Supplier" Role="Audit_Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Audit_Supplier">
-              <PropertyRef Name="SupplierId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Supplier_Country">
-          <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Supplier">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Supplier_State">
-          <End Type="SuitrohDBModel.State" Role="State" Multiplicity="0..1" />
-          <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Supplier">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Audit_CompanyStockTag">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="Stockname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Setdate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedUser" Type="Guid" />
-          <Property Name="ActivityStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyStockTagId" Type="Guid" />
-          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag" FromRole="Audit_CompanyStockTag" ToRole="CompanyStockTag" />
         </EntityType>
         <EntityType Name="CompanyStockTag">
           <Key>
@@ -511,33 +841,133 @@
           <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedUser" Type="Guid" />
           <NavigationProperty Name="Audit_CompanyStockTag" Relationship="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag" FromRole="CompanyStockTag" ToRole="Audit_CompanyStockTag" />
-          <NavigationProperty Name="CurrentStocks" Relationship="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="CurrentStock" />
+          <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_CompanyStockTag" FromRole="CompanyStockTag" ToRole="OrderItem" />
           <NavigationProperty Name="StockIns" Relationship="SuitrohDBModel.FK_StockIn_CompanyStockTag" FromRole="CompanyStockTag" ToRole="StockIn" />
+          <NavigationProperty Name="CurrentStocks" Relationship="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="CurrentStock" />
+          <NavigationProperty Name="Order_CurrentStock" Relationship="SuitrohDBModel.FK_Order_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="Order_CurrentStock" />
         </EntityType>
-        <Association Name="FK_Audit_CompanyStockTag_CompanyStockTag">
-          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="0..1" />
-          <End Type="SuitrohDBModel.Audit_CompanyStockTag" Role="Audit_CompanyStockTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CompanyStockTag">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Audit_CompanyStockTag">
-              <PropertyRef Name="CompanyStockTagId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CurrentStock_CompanyStockTag">
-          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
-          <End Type="SuitrohDBModel.CurrentStock" Role="CurrentStock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CompanyStockTag">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CurrentStock">
-              <PropertyRef Name="StockNameId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Audit_Supplier" Relationship="SuitrohDBModel.FK_Audit_Supplier_Country" FromRole="Country" ToRole="Audit_Supplier" />
+          <NavigationProperty Name="Customers" Relationship="SuitrohDBModel.FK_Customer_Country" FromRole="Country" ToRole="Customer" />
+          <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_Country" FromRole="Country" ToRole="FieldAgent" />
+          <NavigationProperty Name="Suppliers" Relationship="SuitrohDBModel.FK_Supplier_Country" FromRole="Country" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="Storename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarketPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Othernames" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderId" Type="Guid" />
+          <Property Name="PhoneNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_Customer_Country" FromRole="Customer" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_Customer_State" FromRole="Customer" ToRole="State" />
+        </EntityType>
+        <EntityType Name="FieldAgent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Othernames" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderId" Type="Guid" Nullable="false" />
+          <Property Name="AllocatedZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_FieldAgent_Country" FromRole="FieldAgent" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_FieldAgent_State" FromRole="FieldAgent" ToRole="State" />
+          <NavigationProperty Name="Gender" Relationship="SuitrohDBModel.FK_FieldAgent_Gender" FromRole="FieldAgent" ToRole="Gender" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="AgentId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="Pending" Type="Boolean" />
+          <Property Name="Cancelled" Type="Boolean" />
+          <Property Name="TotalOrderAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TotalSuppliedAmount" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItem" />
+          <NavigationProperty Name="Sales" Relationship="SuitrohDBModel.FK_Sale_Order" FromRole="Order" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="ProductId" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="SalesUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SalesTotalAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SuppliedUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SuppliedTotalPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_OrderItems_CompanyStockTag" FromRole="OrderItem" ToRole="CompanyStockTag" />
+          <NavigationProperty Name="Order" Relationship="SuitrohDBModel.FK_OrderItems_Order" FromRole="OrderItem" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="AmountCollected" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CollectorId" Type="Guid" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Order" Relationship="SuitrohDBModel.FK_Sale_Order" FromRole="Sale" ToRole="Order" />
+          <NavigationProperty Name="SaleReports" Relationship="SuitrohDBModel.FK_SaleReport_Sale" FromRole="Sale" ToRole="SaleReport" />
+        </EntityType>
+        <EntityType Name="SaleReport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="SaleId" Type="Guid" Nullable="false" />
+          <Property Name="AmountCollected" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SuppliedAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ProfitMade" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Sale" Relationship="SuitrohDBModel.FK_SaleReport_Sale" FromRole="SaleReport" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audit_Supplier" Relationship="SuitrohDBModel.FK_Audit_Supplier_State" FromRole="State" ToRole="Audit_Supplier" />
+          <NavigationProperty Name="Customers" Relationship="SuitrohDBModel.FK_Customer_State" FromRole="State" ToRole="Customer" />
+          <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_State" FromRole="State" ToRole="FieldAgent" />
+          <NavigationProperty Name="Suppliers" Relationship="SuitrohDBModel.FK_Supplier_State" FromRole="State" ToRole="Supplier" />
+        </EntityType>
         <EntityType Name="StockIn">
           <Key>
             <PropertyRef Name="id" />
@@ -554,9 +984,117 @@
           <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedUser" Type="Guid" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Audit_StockIn" Relationship="SuitrohDBModel.FK_Audit_StockIn_StockIn" FromRole="StockIn" ToRole="Audit_StockIn" />
           <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_StockIn_CompanyStockTag" FromRole="StockIn" ToRole="CompanyStockTag" />
           <NavigationProperty Name="Supplier" Relationship="SuitrohDBModel.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
         </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="Region" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUser" Type="Guid" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Audit_StockIn" Relationship="SuitrohDBModel.FK_Audit_StockIn_Supplier" FromRole="Supplier" ToRole="Audit_StockIn" />
+          <NavigationProperty Name="Audit_Supplier" Relationship="SuitrohDBModel.FK_Audit_Supplier_Supplier" FromRole="Supplier" ToRole="Audit_Supplier" />
+          <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_Supplier_Country" FromRole="Supplier" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_Supplier_State" FromRole="Supplier" ToRole="State" />
+          <NavigationProperty Name="StockIns" Relationship="SuitrohDBModel.FK_StockIn_Supplier" FromRole="Supplier" ToRole="StockIn" />
+        </EntityType>
+        <Association Name="FK_Audit_CompanyStockTag_CompanyStockTag">
+          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.Audit_CompanyStockTag" Role="Audit_CompanyStockTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyStockTag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_CompanyStockTag">
+              <PropertyRef Name="CompanyStockTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Audit_StockIn_StockIn">
+          <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="1" />
+          <End Type="SuitrohDBModel.Audit_StockIn" Role="Audit_StockIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockIn">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_StockIn">
+              <PropertyRef Name="StockInId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Audit_StockIn_Supplier">
+          <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="SuitrohDBModel.Audit_StockIn" Role="Audit_StockIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_StockIn">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Audit_Supplier_Country">
+          <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.Audit_Supplier" Role="Audit_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_Supplier">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Audit_Supplier_State">
+          <End Type="SuitrohDBModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.Audit_Supplier" Role="Audit_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_Supplier">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Audit_Supplier_Supplier">
+          <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="SuitrohDBModel.Audit_Supplier" Role="Audit_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Audit_Supplier">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_CompanyStockTag">
+          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
+          <End Type="SuitrohDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyStockTag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StockIn_CompanyStockTag">
           <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
           <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="*" />
@@ -566,6 +1104,114 @@
             </Principal>
             <Dependent Role="StockIn">
               <PropertyRef Name="CompanyProductNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Country">
+          <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldAgent_Country">
+          <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FieldAgent">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_Country">
+          <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_State">
+          <End Type="SuitrohDBModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FieldAgent_State">
+          <End Type="SuitrohDBModel.State" Role="State" Multiplicity="1" />
+          <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FieldAgent">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Order">
+          <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="SuitrohDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Order">
+          <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="SuitrohDBModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleReport_Sale">
+          <End Type="SuitrohDBModel.Sale" Role="Sale" Multiplicity="1" />
+          <End Type="SuitrohDBModel.SaleReport" Role="SaleReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SaleReport">
+              <PropertyRef Name="SaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supplier_State">
+          <End Type="SuitrohDBModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="StateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -581,70 +1227,118 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Audit_CurrentStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StocknameId" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="PackUnit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CompanyUnitPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CurrentStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StockNameId" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="PackUnit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SupplierUnitPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" FromRole="CurrentStock" ToRole="CompanyStockTag" />
+        </EntityType>
+        <Association Name="FK_CurrentStock_CompanyStockTag">
+          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
+          <End Type="SuitrohDBModel.CurrentStock" Role="CurrentStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyStockTag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CurrentStock">
+              <PropertyRef Name="StockNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order_Audit_CurrentStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StocknameId" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="PackUnit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CompanyUnitPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Order_CurrentStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StockNameId" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ReorderLevel" Type="Int32" Nullable="false" />
+          <Property Name="PackUnit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SupplierUnitPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_Order_CurrentStock_CompanyStockTag" FromRole="Order_CurrentStock" ToRole="CompanyStockTag" />
+        </EntityType>
+        <Association Name="FK_Order_CurrentStock_CompanyStockTag">
+          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
+          <End Type="SuitrohDBModel.Order_CurrentStock" Role="Order_CurrentStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyStockTag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order_CurrentStock">
+              <PropertyRef Name="StockNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_Gender" FromRole="Gender" ToRole="FieldAgent" />
+        </EntityType>
+        <Association Name="FK_FieldAgent_Gender">
+          <End Type="SuitrohDBModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FieldAgent">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SuitrohDBModelStoreContainer" CdmEntityContainer="SuitrohDBEntities">
-          <EntitySetMapping Name="ActivityTags">
-            <EntityTypeMapping TypeName="SuitrohDBModel.ActivityTag">
-              <MappingFragment StoreEntitySet="ActivityTag">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Audit_Supplier">
-            <EntityTypeMapping TypeName="SuitrohDBModel.Audit_Supplier">
-              <MappingFragment StoreEntitySet="Audit_Supplier">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-                <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="SuitrohDBModel.Country">
-              <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CurrentStocks">
-            <EntityTypeMapping TypeName="SuitrohDBModel.CurrentStock">
-              <MappingFragment StoreEntitySet="CurrentStock">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="StockNameId" ColumnName="StockNameId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="SuitrohDBModel.State">
-              <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="SuitrohDBModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -653,6 +1347,208 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityTags">
+            <EntityTypeMapping TypeName="SuitrohDBModel.ActivityTag">
+              <MappingFragment StoreEntitySet="ActivityTag">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit_CompanyStockTag">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Audit_CompanyStockTag">
+              <MappingFragment StoreEntitySet="Audit_CompanyStockTag">
+                <ScalarProperty Name="CompanyStockTagId" ColumnName="CompanyStockTagId" />
+                <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Setdate" ColumnName="Setdate" />
+                <ScalarProperty Name="CompanyPrice" ColumnName="CompanyPrice" />
+                <ScalarProperty Name="Stockname" ColumnName="Stockname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit_StockIn">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Audit_StockIn">
+              <MappingFragment StoreEntitySet="Audit_StockIn">
+                <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+                <ScalarProperty Name="DateSupplied" ColumnName="DateSupplied" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="SuppliedPrice" ColumnName="SuppliedPrice" />
+                <ScalarProperty Name="QuantitySupplied" ColumnName="QuantitySupplied" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="StockInId" ColumnName="StockInId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit_Supplier">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Audit_Supplier">
+              <MappingFragment StoreEntitySet="Audit_Supplier">
+                <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyStockTags">
+            <EntityTypeMapping TypeName="SuitrohDBModel.CompanyStockTag">
+              <MappingFragment StoreEntitySet="CompanyStockTag">
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Setdate" ColumnName="Setdate" />
+                <ScalarProperty Name="CompanyPrice" ColumnName="CompanyPrice" />
+                <ScalarProperty Name="Stockname" ColumnName="Stockname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Othernames" ColumnName="Othernames" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="MarketPlace" ColumnName="MarketPlace" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="Storename" ColumnName="Storename" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldAgents">
+            <EntityTypeMapping TypeName="SuitrohDBModel.FieldAgent">
+              <MappingFragment StoreEntitySet="FieldAgent">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AllocatedZone" ColumnName="AllocatedZone" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Othernames" ColumnName="Othernames" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TotalSuppliedAmount" ColumnName="TotalSuppliedAmount" />
+                <ScalarProperty Name="TotalOrderAmount" ColumnName="TotalOrderAmount" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="SuitrohDBModel.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="SuppliedTotalPrice" ColumnName="SuppliedTotalPrice" />
+                <ScalarProperty Name="SuppliedUnitPrice" ColumnName="SuppliedUnitPrice" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SalesTotalAmount" ColumnName="SalesTotalAmount" />
+                <ScalarProperty Name="SalesUnitPrice" ColumnName="SalesUnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CollectorId" ColumnName="CollectorId" />
+                <ScalarProperty Name="AmountCollected" ColumnName="AmountCollected" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleReports">
+            <EntityTypeMapping TypeName="SuitrohDBModel.SaleReport">
+              <MappingFragment StoreEntitySet="SaleReport">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ProfitMade" ColumnName="ProfitMade" />
+                <ScalarProperty Name="SuppliedAmount" ColumnName="SuppliedAmount" />
+                <ScalarProperty Name="AmountCollected" ColumnName="AmountCollected" />
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="SuitrohDBModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockIns">
+            <EntityTypeMapping TypeName="SuitrohDBModel.StockIn">
+              <MappingFragment StoreEntitySet="StockIn">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+                <ScalarProperty Name="DateSupplied" ColumnName="DateSupplied" />
+                <ScalarProperty Name="QuantitySupplied" ColumnName="QuantitySupplied" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="SuppliedPrice" ColumnName="SuppliedPrice" />
+                <ScalarProperty Name="SupplierProductName" ColumnName="SupplierProductName" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="CompanyProductNameId" ColumnName="CompanyProductNameId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -674,51 +1570,79 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Audit_CompanyStockTag">
-            <EntityTypeMapping TypeName="SuitrohDBModel.Audit_CompanyStockTag">
-              <MappingFragment StoreEntitySet="Audit_CompanyStockTag">
-                <ScalarProperty Name="CompanyStockTagId" ColumnName="CompanyStockTagId" />
-                <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
-                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <EntitySetMapping Name="Audit_CurrentStock">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Audit_CurrentStock">
+              <MappingFragment StoreEntitySet="Audit_CurrentStock">
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Setdate" ColumnName="Setdate" />
-                <ScalarProperty Name="CompanyPrice" ColumnName="CompanyPrice" />
-                <ScalarProperty Name="Stockname" ColumnName="Stockname" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CompanyStockTags">
-            <EntityTypeMapping TypeName="SuitrohDBModel.CompanyStockTag">
-              <MappingFragment StoreEntitySet="CompanyStockTag">
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
                 <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Setdate" ColumnName="Setdate" />
-                <ScalarProperty Name="CompanyPrice" ColumnName="CompanyPrice" />
-                <ScalarProperty Name="Stockname" ColumnName="Stockname" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StockIns">
-            <EntityTypeMapping TypeName="SuitrohDBModel.StockIn">
-              <MappingFragment StoreEntitySet="StockIn">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="CompanyUnitPrice" ColumnName="CompanyUnitPrice" />
+                <ScalarProperty Name="SupplierUnitPrice" ColumnName="SupplierUnitPrice" />
                 <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
-                <ScalarProperty Name="DateSupplied" ColumnName="DateSupplied" />
-                <ScalarProperty Name="QuantitySupplied" ColumnName="QuantitySupplied" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="SuppliedPrice" ColumnName="SuppliedPrice" />
-                <ScalarProperty Name="SupplierProductName" ColumnName="SupplierProductName" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-                <ScalarProperty Name="CompanyProductNameId" ColumnName="CompanyProductNameId" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="StocknameId" ColumnName="StocknameId" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="CurrentStocks">
+            <EntityTypeMapping TypeName="SuitrohDBModel.CurrentStock">
+              <MappingFragment StoreEntitySet="CurrentStock">
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SupplierUnitPrice" ColumnName="SupplierUnitPrice" />
+                <ScalarProperty Name="CompanyUnitPrice" ColumnName="CompanyUnitPrice" />
+                <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="StockNameId" ColumnName="StockNameId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Audit_CurrentStock">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Order_Audit_CurrentStock">
+              <MappingFragment StoreEntitySet="Order_Audit_CurrentStock">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CompanyUnitPrice" ColumnName="CompanyUnitPrice" />
+                <ScalarProperty Name="SupplierUnitPrice" ColumnName="SupplierUnitPrice" />
+                <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="StocknameId" ColumnName="StocknameId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_CurrentStock">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Order_CurrentStock">
+              <MappingFragment StoreEntitySet="Order_CurrentStock">
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SupplierUnitPrice" ColumnName="SupplierUnitPrice" />
+                <ScalarProperty Name="CompanyUnitPrice" ColumnName="CompanyUnitPrice" />
+                <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="StockNameId" ColumnName="StockNameId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="SuitrohDBModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

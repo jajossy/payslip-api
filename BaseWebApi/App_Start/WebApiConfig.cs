@@ -26,7 +26,8 @@ namespace BaseWebApi
             config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
 
             
-            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");//origins,headers,methods   
+            //var cors = new EnableCorsAttribute("http://suitroh.com", "*", "*");//origins,headers,methods
+            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");//origins,headers,methods
             config.EnableCors(cors);
 
             // Code to deal with self referencing loop detected for property in web api

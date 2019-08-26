@@ -17,6 +17,7 @@ namespace BaseWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
+            this.Audit_StockIn = new HashSet<Audit_StockIn>();
             this.Audit_Supplier = new HashSet<Audit_Supplier>();
             this.StockIns = new HashSet<StockIn>();
         }
@@ -34,6 +35,8 @@ namespace BaseWebApi.Models
         public System.Guid CreatedUser { get; set; }
         public Nullable<bool> Status { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Audit_StockIn> Audit_StockIn { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Audit_Supplier> Audit_Supplier { get; set; }
         public virtual Country Country { get; set; }

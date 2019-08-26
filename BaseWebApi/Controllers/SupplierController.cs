@@ -34,7 +34,9 @@ namespace BaseWebApi.Controllers
             supplier.id = Guid.NewGuid();
             supplier.DateCreated = DateTime.Now;
             supplier.Status = true;
+            // Save supplier data
             var savedEntity = _supplierRepository.Add(supplier);
+            // Save supplier to audit tray
             Audit_Supplier auditData = auditHelper(supplier, "Created");
             var auditEntity = _auditSupplierRepository.Add(auditData);
             var response = Request.CreateResponse(HttpStatusCode.Created, savedEntity);
@@ -47,7 +49,11 @@ namespace BaseWebApi.Controllers
         {
             if (supplier == null) throw new ArgumentNullException("supplier");
 
+            // update supplier data
             _supplierRepository.Update(supplier);
+            // update supplier audit tray
+            Audit_Supplier auditData = auditHelper(supplier, "Updated");
+            var auditEntity = _auditSupplierRepository.Add(auditData);
         }
 
         [HttpDelete]
@@ -63,6 +69,7 @@ namespace BaseWebApi.Controllers
             _supplierRepository.Remove(supplier);
         }
 
+        //method to create and save supplier audit tray
         public Audit_Supplier auditHelper(Supplier supplier, string tag)
         {
             Audit_Supplier auditSupplier = new Audit_Supplier();
@@ -83,7 +90,7 @@ namespace BaseWebApi.Controllers
 
             return auditSupplier;
 
-        }
+        }        
 
 
     }

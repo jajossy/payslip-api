@@ -17,10 +17,13 @@ namespace BaseWebApi.Models
         public System.Guid id { get; set; }
         public System.Guid StockNameId { get; set; }
         public int Quantity { get; set; }
+        public Nullable<int> ReorderLevel { get; set; }
         public string PackUnit { get; set; }
-        public double Price { get; set; }
+        public decimal CompanyUnitPrice { get; set; }
+        public Nullable<decimal> SupplierUnitPrice { get; set; }
         public bool Status { get; set; }
         public string Comment { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
     
         public virtual CompanyStockTag CompanyStockTag { get; set; }
     }

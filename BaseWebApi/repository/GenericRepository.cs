@@ -37,6 +37,28 @@ namespace BaseWebApi.repository
             return DbContext.Set<T>().Find(id);
         }
 
+        /*public T GetById(Guid id, params Expression<Func<T, object>>[] includeExpressions)
+        {
+            IDbSet<T> dbSet = DbContext.Set<T>();
+            //T dbSet = DbContext.Set<T>().Find(id);
+
+            //IQueryable<T> query = null;
+            if (includeExpressions.Count() > 0)
+            {
+                IQueryable<T> query = dbSet.Include(includeExpressions[0]);
+                //T query = dbSet.Include(includeExpressions[0]);
+                foreach (var includeExpression in includeExpressions.Skip(1))
+                {
+                    //query = dbSet.Include(includeExpression);
+                    query = query.Include(includeExpression);
+                }                
+                return query.FirstOrDefault() ?? dbSet.Find(id);
+            }
+
+            //return DbContext.Set<T>();
+            return DbContext.Set<T>().Find(id);
+        }*/
+
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
             return DbContext.Set<T>().Where(predicate);

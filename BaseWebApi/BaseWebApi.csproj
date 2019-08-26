@@ -223,9 +223,15 @@
     <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="AutofacWebapiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CurrentStockController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\GenderController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\Order_CurrentStockController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\StockinController.cs" />
     <Compile Include="Controllers\StockTagController.cs" />
@@ -243,6 +249,12 @@
     <Compile Include="Models\Audit_CompanyStockTag.cs">
       <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Audit_CurrentStock.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Audit_StockIn.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Audit_Supplier.cs">
       <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
@@ -253,6 +265,33 @@
       <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentStock.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FieldAgent.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gender.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order_Audit_CurrentStock.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order_CurrentStock.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sale.cs">
+      <DependentUpon>suitrohModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SaleReport.cs">
       <DependentUpon>suitrohModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\State.cs">
@@ -335,6 +374,7 @@
     <Content Include="Models\suitrohModel.edmx.diagram">
       <DependentUpon>suitrohModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

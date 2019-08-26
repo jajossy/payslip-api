@@ -14,6 +14,12 @@ namespace BaseWebApi.Models
     
     public partial class StockIn
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StockIn()
+        {
+            this.Audit_StockIn = new HashSet<Audit_StockIn>();
+        }
+    
         public System.Guid id { get; set; }
         public System.Guid CompanyProductNameId { get; set; }
         public System.Guid SupplierId { get; set; }
@@ -26,7 +32,10 @@ namespace BaseWebApi.Models
         public string BatchNo { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public Nullable<bool> Status { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Audit_StockIn> Audit_StockIn { get; set; }
         public virtual CompanyStockTag CompanyStockTag { get; set; }
         public virtual Supplier Supplier { get; set; }
     }

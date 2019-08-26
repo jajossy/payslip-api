@@ -18,8 +18,10 @@ namespace BaseWebApi.Models
         public CompanyStockTag()
         {
             this.Audit_CompanyStockTag = new HashSet<Audit_CompanyStockTag>();
-            this.CurrentStocks = new HashSet<CurrentStock>();
+            this.OrderItems = new HashSet<OrderItem>();
             this.StockIns = new HashSet<StockIn>();
+            this.CurrentStocks = new HashSet<CurrentStock>();
+            this.Order_CurrentStock = new HashSet<Order_CurrentStock>();
         }
     
         public System.Guid id { get; set; }
@@ -32,8 +34,12 @@ namespace BaseWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Audit_CompanyStockTag> Audit_CompanyStockTag { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CurrentStock> CurrentStocks { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CurrentStock> CurrentStocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_CurrentStock> Order_CurrentStock { get; set; }
     }
 }
