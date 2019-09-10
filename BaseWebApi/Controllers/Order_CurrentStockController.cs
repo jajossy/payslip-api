@@ -21,11 +21,18 @@ namespace BaseWebApi.Controllers
             _orderAuditCurrentStockRepository = orderAuditCurrentStockRepository;
         }
 
+        
         [HttpGet]
         public IQueryable<Order_CurrentStock> Get()
         {
-            return _orderCurrentStockRepository.GetAll();
+            return _orderCurrentStockRepository.GetAll(c => c.CompanyStockTag);
         }
+
+        /*[HttpGet]
+        public IQueryable<Order_CurrentStock> GetOrder()
+        {
+            return _orderCurrentStockRepository.GetAll(c => c.CompanyStockTag);
+        }*/
 
         [HttpPost]
         public HttpResponseMessage Post([FromBody]Order_CurrentStock orderCurrentStock)

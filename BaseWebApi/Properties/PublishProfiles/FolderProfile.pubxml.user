@@ -89,7 +89,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/31/2019 13:39:52</publishTime>
     </File>
     <File Include="bin/BaseWebApi.dll">
-      <publishTime>08/24/2019 14:00:45</publishTime>
+      <publishTime>09/09/2019 13:43:24</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>07/31/2019 13:39:52</publishTime>
@@ -120,6 +120,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>07/31/2019 13:39:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>06/24/2019 19:50:44</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Logging.dll">
+      <publishTime>06/24/2019 19:52:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>06/24/2019 19:56:08</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Cors.dll">
       <publishTime>07/31/2019 13:39:52</publishTime>
@@ -229,6 +238,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>07/31/2019 13:39:52</publishTime>
     </File>
+    <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>08/19/2014 10:03:34</publishTime>
+    </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>11/28/2018 13:00:36</publishTime>
     </File>
@@ -243,6 +255,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>11/28/2018 13:01:00</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Owin.dll">
+      <publishTime>01/28/2015 04:03:16</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
       <publishTime>07/31/2019 13:39:52</publishTime>
@@ -264,6 +279,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>07/31/2019 13:39:52</publishTime>
+    </File>
+    <File Include="bin/Thinktecture.IdentityModel.Core.dll">
+      <publishTime>09/25/2014 15:53:46</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>07/31/2019 13:39:52</publishTime>
@@ -296,10 +314,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/31/2019 13:39:52</publishTime>
     </File>
     <File Include="Models/suitrohModel.edmx.diagram">
-      <publishTime>08/22/2019 12:25:38</publishTime>
+      <publishTime>09/07/2019 10:40:50</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/01/2019 22:41:12</publishTime>
+      <publishTime>09/09/2019 03:19:58</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/31/2019 13:39:52</publishTime>
@@ -341,7 +359,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/31/2019 13:39:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/24/2019 13:58:27</publishTime>
+      <publishTime>09/09/2019 13:43:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

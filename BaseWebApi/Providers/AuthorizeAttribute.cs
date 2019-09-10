@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http.Controllers;
 
-namespace BaseWebApi
+namespace BaseWebApi.Providers
 {
     public class AuthorizeAttribute: System.Web.Http.AuthorizeAttribute
     {

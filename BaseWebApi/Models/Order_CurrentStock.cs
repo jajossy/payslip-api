@@ -20,7 +20,7 @@ namespace BaseWebApi.Models
         public int ReorderLevel { get; set; }
         public string PackUnit { get; set; }
         public decimal CompanyUnitPrice { get; set; }
-        public Nullable<decimal> SupplierUnitPrice { get; set; }
+        public decimal SupplierUnitPrice { get; set; }
         public bool Status { get; set; }
         public string Comment { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }

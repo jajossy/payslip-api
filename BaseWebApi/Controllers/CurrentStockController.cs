@@ -13,18 +13,32 @@ namespace BaseWebApi.Controllers
     {
         private readonly IGenericRepository<CurrentStock> _currentStockRepository;
         private readonly IGenericRepository<Audit_CurrentStock> _auditCurrentStockRepository;
+        private readonly IGenericRepository<Order_CurrentStock> _orderCurrentStockRepository;
+        private readonly IGenericRepository<Order_Audit_CurrentStock> _orderAuditCurrentStockRepository;
+
 
         public CurrentStockController(IGenericRepository<CurrentStock> currentStockRepository,
-                                  IGenericRepository<Audit_CurrentStock> auditCurrentStockRepository)
+                                  IGenericRepository<Audit_CurrentStock> auditCurrentStockRepository,
+                                  IGenericRepository<Order_CurrentStock> orderCurrentStockRepository,
+                                  IGenericRepository<Order_Audit_CurrentStock> orderAuditCurrentStockRepository)
         {
             _currentStockRepository = currentStockRepository;
             _auditCurrentStockRepository = auditCurrentStockRepository;
+            _orderCurrentStockRepository = orderCurrentStockRepository;
+            _orderAuditCurrentStockRepository = orderAuditCurrentStockRepository;
+
         }
 
         [HttpGet]
         public IQueryable<CurrentStock> Get()
         {
             return _currentStockRepository.GetAll(c => c.CompanyStockTag);
+        }
+
+        [HttpGet]
+        public IQueryable<Order_CurrentStock> GetOrder()
+        {
+            return _orderCurrentStockRepository.GetAll(c => c.CompanyStockTag);
         }
 
         // check if stock already exist in company inventory
@@ -42,9 +56,32 @@ namespace BaseWebApi.Controllers
             currentStock.Status = false;
             // Save Current Stock data
             var savedEntity = _currentStockRepository.Add(currentStock);
+
+            // Save also to order current stock table to monitor orderings
+            Order_CurrentStock orderCurrentStock = new Order_CurrentStock();
+
+            orderCurrentStock.id = currentStock.id;
+            orderCurrentStock.StockNameId = currentStock.StockNameId;
+            orderCurrentStock.Quantity = currentStock.Quantity;
+            orderCurrentStock.ReorderLevel = currentStock.ReorderLevel;
+            orderCurrentStock.PackUnit = currentStock.PackUnit;
+            orderCurrentStock.CompanyUnitPrice = currentStock.CompanyUnitPrice;
+            orderCurrentStock.SupplierUnitPrice = currentStock.SupplierUnitPrice;
+            orderCurrentStock.Status = currentStock.Status;
+            orderCurrentStock.Comment = currentStock.Comment;
+            orderCurrentStock.CreatedUser = currentStock.CreatedUser;
+
+            var savedOrderCurrent = _orderCurrentStockRepository.Add(orderCurrentStock);
+
             // Save Current Stock to audit tray
             Audit_CurrentStock auditData = auditHelper(currentStock, "Created");
             var auditEntity = _auditCurrentStockRepository.Add(auditData);
+
+            // Save Order Current Stock to audit tray
+            Order_Audit_CurrentStock auditData2 = auditHelper2(orderCurrentStock, "Created");
+            var auditEntity2 = _orderAuditCurrentStockRepository.Add(auditData2);
+
+
             var response = Request.CreateResponse(HttpStatusCode.Created, savedEntity);
 
             return response;
@@ -86,7 +123,7 @@ namespace BaseWebApi.Controllers
             auditCurrentStock.Quantity = currentStock.Quantity;
             auditCurrentStock.ReorderLevel = currentStock.ReorderLevel;
             auditCurrentStock.PackUnit = currentStock.PackUnit;
-            //auditCurrentStock.SupplierUnitPrice = currentStock.SupplierUnitPrice;  --will resolve from database later
+            auditCurrentStock.SupplierUnitPrice = currentStock.SupplierUnitPrice;
             auditCurrentStock.CompanyUnitPrice = currentStock.CompanyUnitPrice;
             auditCurrentStock.CreatedUser = currentStock.CreatedUser;
             auditCurrentStock.DateEntered = DateTime.Now;
@@ -94,6 +131,27 @@ namespace BaseWebApi.Controllers
 
 
             return auditCurrentStock;
+
+        }
+
+        //method to create and current stock audit tray
+        public Order_Audit_CurrentStock auditHelper2(Order_CurrentStock orderCurrenttStock, string tag)
+        {
+            Order_Audit_CurrentStock auditOrderCurrentStock = new Order_Audit_CurrentStock();
+
+            auditOrderCurrentStock.id = Guid.NewGuid();
+            auditOrderCurrentStock.StocknameId = orderCurrenttStock.StockNameId;
+            auditOrderCurrentStock.Quantity = orderCurrenttStock.Quantity;
+            auditOrderCurrentStock.ReorderLevel = orderCurrenttStock.ReorderLevel;
+            auditOrderCurrentStock.PackUnit = orderCurrenttStock.PackUnit;
+            auditOrderCurrentStock.SupplierUnitPrice = orderCurrenttStock.SupplierUnitPrice;
+            auditOrderCurrentStock.CompanyUnitPrice = orderCurrenttStock.CompanyUnitPrice;
+            auditOrderCurrentStock.CreatedUser = orderCurrenttStock.CreatedUser;
+            auditOrderCurrentStock.DateEntered = DateTime.Now;
+            auditOrderCurrentStock.Comment = orderCurrenttStock.Comment;
+
+
+            return auditOrderCurrentStock;
 
         }
     }

@@ -27,8 +27,8 @@ namespace BaseWebApi
 
             
             //var cors = new EnableCorsAttribute("http://suitroh.com", "*", "*");//origins,headers,methods
-            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");//origins,headers,methods
-            config.EnableCors(cors);
+            //var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");//origins,headers,methods
+            //config.EnableCors(cors);
 
             // Code to deal with self referencing loop detected for property in web api
             GlobalConfiguration.Configuration.Formatters

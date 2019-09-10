@@ -97,3 +97,15 @@ E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.Web.xml
 E:\repository\web_api\BaseWebApi\obj\Release\BaseWebApi.csprojResolveAssemblyReference.cache
 E:\repository\web_api\BaseWebApi\obj\Release\BaseWebApi.dll
 E:\repository\web_api\BaseWebApi\obj\Release\BaseWebApi.pdb
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Logging.dll
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Tokens.dll
+E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.dll
+E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Owin.dll
+E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.dll
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Logging.xml
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Tokens.xml
+E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.xml
+E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Owin.xml
+E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.pdb

@@ -13,12 +13,15 @@ namespace BaseWebApi.Controllers
     {
         private readonly IGenericRepository<Order> _orderRepository;
         private readonly IGenericRepository<OrderItem> _orderItemRepository;
+        private readonly IGenericRepository<Order_CurrentStock> _orderCurrentRepository;
 
         public OrderController(IGenericRepository<Order> orderRepository,
-                               IGenericRepository<OrderItem> orderItemRepository)
+                               IGenericRepository<OrderItem> orderItemRepository,
+                               IGenericRepository<Order_CurrentStock> orderCurrentRepository)
         {
             _orderRepository = orderRepository;
             _orderItemRepository = orderItemRepository;
+            _orderCurrentRepository = orderCurrentRepository;
         }
 
         public IQueryable<Order> Get()
@@ -26,25 +29,77 @@ namespace BaseWebApi.Controllers
             return _orderRepository.GetAll();
         }
 
-        [HttpPost]
-        public HttpResponseMessage Post([FromBody]Order order)
+        public IQueryable<OrderItem> GetItem()
         {
-            if (!ModelState.IsValid) return Request.CreateResponse(HttpStatusCode.BadRequest);
-            order.id = Guid.NewGuid();
-            order.DateCreated = DateTime.Now;
-            
-            // Save Order data
-            var savedEntity = _orderRepository.Add(order);
+            return _orderItemRepository.GetAll();
+        }
 
-            // Save each order items
-            foreach (var ord in order.OrderItems)
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody]OrderItem[] orderItems)
+        {
+            //if (!ModelState.IsValid) return Request.CreateResponse(HttpStatusCode.BadRequest);            
+
+            decimal count = 0;
+            // calculate total sales amount
+            foreach (var ord in orderItems)
+            {                
+                count = count + ord.SalesTotalAmount;
+            }
+
+            // Compute and Save Order data
+
+            Order orderEntity = new Order();
+            orderEntity.id = Guid.NewGuid();
+
+            // use the date and time to created a unique hash tag for order
+            DateTime _now = DateTime.Now;
+            string _dd = _now.ToString("dd"); //
+            string _mm = _now.ToString("MM");
+            string _yy = _now.ToString("yyyy");
+            string _hh = _now.Hour.ToString();
+            string _min = _now.Minute.ToString();
+            string _ss = _now.Second.ToString();
+
+            string _uniqueId = _dd + _hh + _mm + _min + _ss + _yy;
+            orderEntity.OrderTag = "#" + _uniqueId;
+
+            orderEntity.DateCreated = DateTime.Now;
+            orderEntity.TotalOrderAmount = count;
+            orderEntity.AgentId = Guid.Parse("EF629817-3DB3-4EF2-901F-202C6C07EFA6"); // item orderid holds the agent id
+            orderEntity.CustomerId = orderItems[0].id;
+            orderEntity.PaymentType = orderItems[0].BatchNo;
+            orderEntity.Pending = true;
+            var savedEntity = _orderRepository.Add(orderEntity);
+
+            // Save each order items with order id
+            foreach (var ord in orderItems)
             {
                 ord.id = Guid.NewGuid();
-                ord.OrderId = order.id;
-                var itemEntity = _orderItemRepository.Add(ord);
+                ord.OrderId = orderEntity.id;
+                ord.BatchNo = "";
+                var itemEntity = _orderItemRepository.Add(ord);                
+            }
+
+            // update order current stock accordingly
+            foreach (var ord2 in orderItems)
+            {
+                // Get ordered product from stock
+                var orderCurrentProduct = _orderCurrentRepository.GetAll()
+                    .Where(pd => pd.StockNameId == ord2.ProductId).FirstOrDefault();
+                
+                //deduct ordered quantity and update
+                int soldStock = ord2.Quantity;
+                int quantityInStock  = orderCurrentProduct.Quantity;
+                int balance = quantityInStock - soldStock;
+
+                // update current stock in quantity
+                orderCurrentProduct.Quantity = balance;
+                // update order stock
+                _orderCurrentRepository.Update(orderCurrentProduct);
+
             }
             
-            var response = Request.CreateResponse(HttpStatusCode.Created, savedEntity);
+            var response = Request.CreateResponse(HttpStatusCode.Created, savedEntity);         
 
             return response;
         }

@@ -225,6 +225,9 @@ E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.Web.dll
 E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.WindowsServer.dll
 E:\repository\web_api\BaseWebApi\bin\Microsoft.ApplicationInsights.dll
 E:\repository\web_api\BaseWebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Logging.dll
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Tokens.dll
 E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.Cors.dll
 E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.dll
 E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.Host.SystemWeb.dll
@@ -240,6 +243,7 @@ E:\repository\web_api\BaseWebApi\bin\System.Web.Cors.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Helpers.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Cors.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.dll
+E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Owin.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.WebHost.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Mvc.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Optimization.dll
@@ -254,6 +258,9 @@ E:\repository\web_api\BaseWebApi\bin\Autofac.Integration.WebApi.xml
 E:\repository\web_api\BaseWebApi\bin\EntityFramework.xml
 E:\repository\web_api\BaseWebApi\bin\EntityFramework.SqlServer.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Logging.xml
+E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Tokens.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.Cors.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.Host.SystemWeb.xml
@@ -264,6 +271,7 @@ E:\repository\web_api\BaseWebApi\bin\NLog.xml
 E:\repository\web_api\BaseWebApi\bin\System.Net.Http.Formatting.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Cors.xml
+E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Owin.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Helpers.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.WebHost.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Mvc.xml
@@ -281,3 +289,7 @@ E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.Web.xml
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.dll
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.pdb
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.csprojResolveAssemblyReference.cache
+E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.dll
+E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.dll
+E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.xml
+E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.pdb

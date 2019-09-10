@@ -133,21 +133,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="SuitrohDBModel.Order">
-        <MappingFragment StoreEntitySet="Order">
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="TotalSuppliedAmount" ColumnName="TotalSuppliedAmount" />
-          <ScalarProperty Name="TotalOrderAmount" ColumnName="TotalOrderAmount" />
-          <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
-          <ScalarProperty Name="Pending" ColumnName="Pending" />
-          <ScalarProperty Name="Approved" ColumnName="Approved" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrderItems">
       <EntityTypeMapping TypeName="SuitrohDBModel.OrderItem">
         <MappingFragment StoreEntitySet="OrderItems">
@@ -248,6 +233,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="SuitrohDBModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SuitrohDBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CurrentStocks">
       <EntityTypeMapping TypeName="SuitrohDBModel.CurrentStock">
         <MappingFragment StoreEntitySet="CurrentStock">
@@ -296,10 +304,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Genders">
-      <EntityTypeMapping TypeName="SuitrohDBModel.Gender">
-        <MappingFragment StoreEntitySet="Gender">
-          <ScalarProperty Name="Description" ColumnName="Description" />
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="SuitrohDBModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="TotalSuppliedAmount" ColumnName="TotalSuppliedAmount" />
+          <ScalarProperty Name="TotalOrderAmount" ColumnName="TotalOrderAmount" />
+          <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+          <ScalarProperty Name="Pending" ColumnName="Pending" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

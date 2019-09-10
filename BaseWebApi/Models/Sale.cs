@@ -26,8 +26,8 @@ namespace BaseWebApi.Models
         public Nullable<System.Guid> CollectorId { get; set; }
         public System.DateTime DateCreated { get; set; }
     
-        public virtual Order Order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleReport> SaleReports { get; set; }
+        public virtual Order Order { get; set; }
     }
 }
