@@ -28,7 +28,7 @@ namespace BaseWebApi.Models
         public bool Status { get; set; }
         public string ActivityStatus { get; set; }
     
-        public virtual StockIn StockIn { get; set; }
         public virtual Supplier Supplier { get; set; }
+        public virtual StockIn StockIn { get; set; }
     }
 }

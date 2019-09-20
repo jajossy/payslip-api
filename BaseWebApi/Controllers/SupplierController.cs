@@ -35,7 +35,7 @@ namespace BaseWebApi.Controllers
             supplier.DateCreated = DateTime.Now;
             supplier.Status = true;
             // Save supplier data
-            var savedEntity = _supplierRepository.Add(supplier);
+            var savedEntity  = _supplierRepository.Add(supplier);
             // Save supplier to audit tray
             Audit_Supplier auditData = auditHelper(supplier, "Created");
             var auditEntity = _auditSupplierRepository.Add(auditData);

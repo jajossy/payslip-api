@@ -14,6 +14,12 @@ namespace BaseWebApi.Models
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public System.Guid id { get; set; }
         public string Storename { get; set; }
         public string Zone { get; set; }
@@ -33,5 +39,7 @@ namespace BaseWebApi.Models
     
         public virtual Country Country { get; set; }
         public virtual State State { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

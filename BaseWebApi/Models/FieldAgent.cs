@@ -14,6 +14,12 @@ namespace BaseWebApi.Models
     
     public partial class FieldAgent
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FieldAgent()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public System.Guid id { get; set; }
         public string Surname { get; set; }
         public string Firstname { get; set; }
@@ -22,13 +28,15 @@ namespace BaseWebApi.Models
         public string AllocatedZone { get; set; }
         public string Remark { get; set; }
         public bool Status { get; set; }
-        public int CountryId { get; set; }
-        public int StateId { get; set; }
+        public Nullable<int> CountryId { get; set; }
+        public Nullable<int> StateId { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public System.DateTime DateCreated { get; set; }
     
         public virtual Country Country { get; set; }
-        public virtual State State { get; set; }
         public virtual Gender Gender { get; set; }
+        public virtual State State { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

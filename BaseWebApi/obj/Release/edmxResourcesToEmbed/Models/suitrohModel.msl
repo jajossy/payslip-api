@@ -180,25 +180,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="StockIns">
-      <EntityTypeMapping TypeName="SuitrohDBModel.StockIn">
-        <MappingFragment StoreEntitySet="StockIn">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-          <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
-          <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
-          <ScalarProperty Name="DateSupplied" ColumnName="DateSupplied" />
-          <ScalarProperty Name="QuantitySupplied" ColumnName="QuantitySupplied" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="SuppliedPrice" ColumnName="SuppliedPrice" />
-          <ScalarProperty Name="SupplierProductName" ColumnName="SupplierProductName" />
-          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-          <ScalarProperty Name="CompanyProductNameId" ColumnName="CompanyProductNameId" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Suppliers">
       <EntityTypeMapping TypeName="SuitrohDBModel.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
@@ -304,9 +285,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="StockIns">
+      <EntityTypeMapping TypeName="SuitrohDBModel.StockIn">
+        <MappingFragment StoreEntitySet="StockIn">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+          <ScalarProperty Name="PackUnit" ColumnName="PackUnit" />
+          <ScalarProperty Name="DateSupplied" ColumnName="DateSupplied" />
+          <ScalarProperty Name="QuantitySupplied" ColumnName="QuantitySupplied" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="SuppliedPrice" ColumnName="SuppliedPrice" />
+          <ScalarProperty Name="SupplierProductName" ColumnName="SupplierProductName" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="CompanyProductNameId" ColumnName="CompanyProductNameId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="SuitrohDBModel.Order">
         <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="OrderTag" ColumnName="OrderTag" />
           <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="TotalSuppliedAmount" ColumnName="TotalSuppliedAmount" />

@@ -28,14 +28,16 @@ namespace BaseWebApi.Models
         public Nullable<bool> Pending { get; set; }
         public Nullable<bool> Cancelled { get; set; }
         public decimal TotalOrderAmount { get; set; }
-        public Nullable<decimal> TotalSuppliedAmount { get; set; }
+        public decimal TotalSuppliedAmount { get; set; }
         public System.DateTime DateCreated { get; set; }
         public string PaymentType { get; set; }
         public string OrderTag { get; set; }
     
+        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }
+        public virtual FieldAgent FieldAgent { get; set; }
     }
 }

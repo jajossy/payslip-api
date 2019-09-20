@@ -12,10 +12,12 @@ namespace BaseWebApi.Controllers
     public class SaleController : ApiController
     {
         private readonly IGenericRepository<Sale> _saleRepository;
+        private readonly IGenericRepository<SaleReport> _saleReportRepository;
 
-        public SaleController(IGenericRepository<Sale> saleRepository)
+        public SaleController(IGenericRepository<Sale> saleRepository, IGenericRepository<SaleReport> saleReportRepository)
         {
             _saleRepository = saleRepository;
+            _saleReportRepository = saleReportRepository;
         }
 
         public IQueryable<Sale> Get()

@@ -238,6 +238,7 @@ E:\repository\web_api\BaseWebApi\bin\Newtonsoft.Json.dll
 E:\repository\web_api\BaseWebApi\bin\NLog.dll
 E:\repository\web_api\BaseWebApi\bin\Owin.dll
 E:\repository\web_api\BaseWebApi\bin\Purplelight.Framework.Autofac.Integration.WebApi.dll
+E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.dll
 E:\repository\web_api\BaseWebApi\bin\System.Net.Http.Formatting.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Cors.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.Helpers.dll
@@ -251,7 +252,9 @@ E:\repository\web_api\BaseWebApi\bin\System.Web.Razor.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.WebPages.Deployment.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.WebPages.dll
 E:\repository\web_api\BaseWebApi\bin\System.Web.WebPages.Razor.dll
+E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.dll
 E:\repository\web_api\BaseWebApi\bin\WebGrease.dll
+E:\repository\web_api\BaseWebApi\bin\Microsoft.mshtml.dll
 E:\repository\web_api\BaseWebApi\bin\Autofac.pdb
 E:\repository\web_api\BaseWebApi\bin\Autofac.xml
 E:\repository\web_api\BaseWebApi\bin\Autofac.Integration.WebApi.xml
@@ -268,6 +271,7 @@ E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.Security.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.Owin.Security.OAuth.xml
 E:\repository\web_api\BaseWebApi\bin\Newtonsoft.Json.xml
 E:\repository\web_api\BaseWebApi\bin\NLog.xml
+E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.xml
 E:\repository\web_api\BaseWebApi\bin\System.Net.Http.Formatting.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Cors.xml
@@ -280,16 +284,13 @@ E:\repository\web_api\BaseWebApi\bin\System.Web.Razor.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.WebPages.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.WebPages.Deployment.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.WebPages.Razor.xml
+E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.pdb
 E:\repository\web_api\BaseWebApi\bin\Antlr3.Runtime.pdb
 E:\repository\web_api\BaseWebApi\bin\Microsoft.ApplicationInsights.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.DependencyCollector.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.ServerTelemetryChannel.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.WindowsServer.xml
 E:\repository\web_api\BaseWebApi\bin\Microsoft.AI.Web.xml
+E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.csprojResolveAssemblyReference.cache
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.dll
 E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.pdb
-E:\repository\web_api\BaseWebApi\obj\Debug\BaseWebApi.csprojResolveAssemblyReference.cache
-E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.dll
-E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.dll
-E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.xml
-E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.pdb

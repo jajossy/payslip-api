@@ -161,9 +161,10 @@
     <Property Name="Pending" Type="bit" />
     <Property Name="Cancelled" Type="bit" />
     <Property Name="TotalOrderAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-    <Property Name="TotalSuppliedAmount" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="TotalSuppliedAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderTag" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Order_Audit_CurrentStock">
     <Key>
@@ -245,7 +246,7 @@
     <Property Name="id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="CompanyProductNameId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SupplierId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="SupplierProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SupplierProductName" Type="nvarchar" MaxLength="50" />
     <Property Name="SuppliedPrice" Type="decimal" Precision="12" Scale="2" />
     <Property Name="UnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
     <Property Name="QuantitySupplied" Type="int" Nullable="false" />
@@ -453,6 +454,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Order_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_FieldAgent">
+    <End Role="FieldAgent" Type="Self.FieldAgent" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FieldAgent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_OrderItems_CompanyStockTag">
     <End Role="CompanyStockTag" Type="Self.CompanyStockTag" Multiplicity="1" />
     <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
@@ -623,6 +648,14 @@
     <AssociationSet Name="FK_Order_CurrentStock_CompanyStockTag" Association="Self.FK_Order_CurrentStock_CompanyStockTag">
       <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />
       <End Role="Order_CurrentStock" EntitySet="Order_CurrentStock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_FieldAgent" Association="Self.FK_Order_FieldAgent">
+      <End Role="FieldAgent" EntitySet="FieldAgent" />
+      <End Role="Order" EntitySet="Order" />
     </AssociationSet>
     <AssociationSet Name="FK_OrderItems_CompanyStockTag" Association="Self.FK_OrderItems_CompanyStockTag">
       <End Role="CompanyStockTag" EntitySet="CompanyStockTag" />

@@ -22,13 +22,25 @@ namespace BaseWebApi.Controllers
         [HttpGet]
         public IQueryable<User> Get()
         {
-            return _userRepository.GetAll();
+            var user =  _userRepository.GetAll();
+            foreach(var u in user)
+            {
+                var convertPassword = EncryptDecrypt.Decrypt(u.password);
+                u.password = convertPassword;
+            }
+            return user;
         }
 
         [HttpGet]
-        public User GetById(Guid id)
+        public IQueryable<User> GetById(Guid id)
         {
-            return _userRepository.GetAll().Where(x => x.id == id).FirstOrDefault();
+            var user = _userRepository.GetAll().Where(x => x.id == id);
+            foreach (var u in user)
+            {
+                var convertPassword = EncryptDecrypt.Decrypt(u.password);
+                u.password = convertPassword;
+            }
+            return user;
         }
 
         [HttpPost]
@@ -36,8 +48,7 @@ namespace BaseWebApi.Controllers
         {
             if (!ModelState.IsValid) return Request.CreateResponse(HttpStatusCode.BadRequest);
             user.id = Guid.NewGuid();
-            user.password = EncryptDecrypt.Encrypt(user.password);            
-            user.UserId = Guid.Parse("F65A4320-6ABE-4FDF-A395-0067C1FB2611");
+            user.password = EncryptDecrypt.Encrypt(user.password);           
             user.DateCreated = DateTime.Now;
             // Save Order Current Stock data
             var savedEntity = _userRepository.Add(user);            

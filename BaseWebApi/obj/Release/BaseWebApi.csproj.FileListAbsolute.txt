@@ -109,3 +109,4 @@ E:\repository\web_api\BaseWebApi\bin\Microsoft.IdentityModel.Tokens.xml
 E:\repository\web_api\BaseWebApi\bin\System.IdentityModel.Tokens.Jwt.xml
 E:\repository\web_api\BaseWebApi\bin\System.Web.Http.Owin.xml
 E:\repository\web_api\BaseWebApi\bin\Thinktecture.IdentityModel.Core.pdb
+E:\repository\web_api\BaseWebApi\bin\Microsoft.mshtml.dll

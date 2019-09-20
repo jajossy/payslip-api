@@ -19,20 +19,14 @@
     <EntitySet Name="CompanyStockTags" EntityType="SuitrohDBModel.CompanyStockTag" />
     <EntitySet Name="Countries" EntityType="SuitrohDBModel.Country" />
     <EntitySet Name="Customers" EntityType="SuitrohDBModel.Customer" />
-    <EntitySet Name="FieldAgents" EntityType="SuitrohDBModel.FieldAgent" />
     <EntitySet Name="OrderItems" EntityType="SuitrohDBModel.OrderItem" />
     <EntitySet Name="Sales" EntityType="SuitrohDBModel.Sale" />
     <EntitySet Name="SaleReports" EntityType="SuitrohDBModel.SaleReport" />
     <EntitySet Name="States" EntityType="SuitrohDBModel.State" />
-    <EntitySet Name="StockIns" EntityType="SuitrohDBModel.StockIn" />
     <EntitySet Name="Suppliers" EntityType="SuitrohDBModel.Supplier" />
     <AssociationSet Name="FK_Audit_CompanyStockTag_CompanyStockTag" Association="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag">
       <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
       <End Role="Audit_CompanyStockTag" EntitySet="Audit_CompanyStockTag" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Audit_StockIn_StockIn" Association="SuitrohDBModel.FK_Audit_StockIn_StockIn">
-      <End Role="StockIn" EntitySet="StockIns" />
-      <End Role="Audit_StockIn" EntitySet="Audit_StockIn" />
     </AssociationSet>
     <AssociationSet Name="FK_Audit_StockIn_Supplier" Association="SuitrohDBModel.FK_Audit_StockIn_Supplier">
       <End Role="Supplier" EntitySet="Suppliers" />
@@ -54,17 +48,9 @@
       <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
       <End Role="OrderItem" EntitySet="OrderItems" />
     </AssociationSet>
-    <AssociationSet Name="FK_StockIn_CompanyStockTag" Association="SuitrohDBModel.FK_StockIn_CompanyStockTag">
-      <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
-      <End Role="StockIn" EntitySet="StockIns" />
-    </AssociationSet>
     <AssociationSet Name="FK_Customer_Country" Association="SuitrohDBModel.FK_Customer_Country">
       <End Role="Country" EntitySet="Countries" />
       <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FieldAgent_Country" Association="SuitrohDBModel.FK_FieldAgent_Country">
-      <End Role="Country" EntitySet="Countries" />
-      <End Role="FieldAgent" EntitySet="FieldAgents" />
     </AssociationSet>
     <AssociationSet Name="FK_Supplier_Country" Association="SuitrohDBModel.FK_Supplier_Country">
       <End Role="Country" EntitySet="Countries" />
@@ -74,10 +60,6 @@
       <End Role="State" EntitySet="States" />
       <End Role="Customer" EntitySet="Customers" />
     </AssociationSet>
-    <AssociationSet Name="FK_FieldAgent_State" Association="SuitrohDBModel.FK_FieldAgent_State">
-      <End Role="State" EntitySet="States" />
-      <End Role="FieldAgent" EntitySet="FieldAgents" />
-    </AssociationSet>
     <AssociationSet Name="FK_SaleReport_Sale" Association="SuitrohDBModel.FK_SaleReport_Sale">
       <End Role="Sale" EntitySet="Sales" />
       <End Role="SaleReport" EntitySet="SaleReports" />
@@ -86,16 +68,8 @@
       <End Role="State" EntitySet="States" />
       <End Role="Supplier" EntitySet="Suppliers" />
     </AssociationSet>
-    <AssociationSet Name="FK_StockIn_Supplier" Association="SuitrohDBModel.FK_StockIn_Supplier">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="StockIn" EntitySet="StockIns" />
-    </AssociationSet>
     <EntitySet Name="Audit_CurrentStock" EntityType="SuitrohDBModel.Audit_CurrentStock" />
     <EntitySet Name="Genders" EntityType="SuitrohDBModel.Gender" />
-    <AssociationSet Name="FK_FieldAgent_Gender" Association="SuitrohDBModel.FK_FieldAgent_Gender">
-      <End Role="Gender" EntitySet="Genders" />
-      <End Role="FieldAgent" EntitySet="FieldAgents" />
-    </AssociationSet>
     <EntitySet Name="Users" EntityType="SuitrohDBModel.User" />
     <EntitySet Name="CurrentStocks" EntityType="SuitrohDBModel.CurrentStock" />
     <AssociationSet Name="FK_CurrentStock_CompanyStockTag" Association="SuitrohDBModel.FK_CurrentStock_CompanyStockTag">
@@ -108,7 +82,24 @@
       <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
       <End Role="Order_CurrentStock" EntitySet="Order_CurrentStock" />
     </AssociationSet>
+    <EntitySet Name="StockIns" EntityType="SuitrohDBModel.StockIn" />
+    <AssociationSet Name="FK_Audit_StockIn_StockIn" Association="SuitrohDBModel.FK_Audit_StockIn_StockIn">
+      <End Role="StockIn" EntitySet="StockIns" />
+      <End Role="Audit_StockIn" EntitySet="Audit_StockIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_CompanyStockTag" Association="SuitrohDBModel.FK_StockIn_CompanyStockTag">
+      <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Supplier" Association="SuitrohDBModel.FK_StockIn_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
     <EntitySet Name="Orders" EntityType="SuitrohDBModel.Order" />
+    <AssociationSet Name="FK_Order_Customer" Association="SuitrohDBModel.FK_Order_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
     <AssociationSet Name="FK_OrderItems_Order" Association="SuitrohDBModel.FK_OrderItems_Order">
       <End Role="Order" EntitySet="Orders" />
       <End Role="OrderItem" EntitySet="OrderItems" />
@@ -116,6 +107,23 @@
     <AssociationSet Name="FK_Sale_Order" Association="SuitrohDBModel.FK_Sale_Order">
       <End Role="Order" EntitySet="Orders" />
       <End Role="Sale" EntitySet="Sales" />
+    </AssociationSet>
+    <EntitySet Name="FieldAgents" EntityType="SuitrohDBModel.FieldAgent" />
+    <AssociationSet Name="FK_FieldAgent_Country" Association="SuitrohDBModel.FK_FieldAgent_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="FieldAgent" EntitySet="FieldAgents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FieldAgent_Gender" Association="SuitrohDBModel.FK_FieldAgent_Gender">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="FieldAgent" EntitySet="FieldAgents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FieldAgent_State" Association="SuitrohDBModel.FK_FieldAgent_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="FieldAgent" EntitySet="FieldAgents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_FieldAgent" Association="SuitrohDBModel.FK_Order_FieldAgent">
+      <End Role="FieldAgent" EntitySet="FieldAgents" />
+      <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ActivityTag">
@@ -156,8 +164,8 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="ActivityStatus" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="StockIn" Relationship="SuitrohDBModel.FK_Audit_StockIn_StockIn" FromRole="Audit_StockIn" ToRole="StockIn" />
     <NavigationProperty Name="Supplier" Relationship="SuitrohDBModel.FK_Audit_StockIn_Supplier" FromRole="Audit_StockIn" ToRole="Supplier" />
+    <NavigationProperty Name="StockIn" Relationship="SuitrohDBModel.FK_Audit_StockIn_StockIn" FromRole="Audit_StockIn" ToRole="StockIn" />
   </EntityType>
   <EntityType Name="Audit_Supplier">
     <Key>
@@ -193,9 +201,9 @@
     <Property Name="CreatedUser" Type="Guid" />
     <NavigationProperty Name="Audit_CompanyStockTag" Relationship="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag" FromRole="CompanyStockTag" ToRole="Audit_CompanyStockTag" />
     <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_CompanyStockTag" FromRole="CompanyStockTag" ToRole="OrderItem" />
-    <NavigationProperty Name="StockIns" Relationship="SuitrohDBModel.FK_StockIn_CompanyStockTag" FromRole="CompanyStockTag" ToRole="StockIn" />
     <NavigationProperty Name="CurrentStocks" Relationship="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="CurrentStock" />
     <NavigationProperty Name="Order_CurrentStock" Relationship="SuitrohDBModel.FK_Order_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="Order_CurrentStock" />
+    <NavigationProperty Name="StockIns" Relationship="SuitrohDBModel.FK_StockIn_CompanyStockTag" FromRole="CompanyStockTag" ToRole="StockIn" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
@@ -205,8 +213,8 @@
     <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Audit_Supplier" Relationship="SuitrohDBModel.FK_Audit_Supplier_Country" FromRole="Country" ToRole="Audit_Supplier" />
     <NavigationProperty Name="Customers" Relationship="SuitrohDBModel.FK_Customer_Country" FromRole="Country" ToRole="Customer" />
-    <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_Country" FromRole="Country" ToRole="FieldAgent" />
     <NavigationProperty Name="Suppliers" Relationship="SuitrohDBModel.FK_Supplier_Country" FromRole="Country" ToRole="Supplier" />
+    <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_Country" FromRole="Country" ToRole="FieldAgent" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -230,26 +238,7 @@
     <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_Customer_Country" FromRole="Customer" ToRole="Country" />
     <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_Customer_State" FromRole="Customer" ToRole="State" />
-  </EntityType>
-  <EntityType Name="FieldAgent">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Guid" Nullable="false" />
-    <Property Name="Surname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-    <Property Name="Firstname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-    <Property Name="Othernames" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GenderId" Type="Guid" Nullable="false" />
-    <Property Name="AllocatedZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="Boolean" Nullable="false" />
-    <Property Name="CountryId" Type="Int32" Nullable="false" />
-    <Property Name="StateId" Type="Int32" Nullable="false" />
-    <Property Name="CreatedUser" Type="Guid" />
-    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_FieldAgent_Country" FromRole="FieldAgent" ToRole="Country" />
-    <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_FieldAgent_State" FromRole="FieldAgent" ToRole="State" />
-    <NavigationProperty Name="Gender" Relationship="SuitrohDBModel.FK_FieldAgent_Gender" FromRole="FieldAgent" ToRole="Gender" />
+    <NavigationProperty Name="Orders" Relationship="SuitrohDBModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
   </EntityType>
   <EntityType Name="OrderItem">
     <Key>
@@ -300,29 +289,8 @@
     <Property Name="CountryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Audit_Supplier" Relationship="SuitrohDBModel.FK_Audit_Supplier_State" FromRole="State" ToRole="Audit_Supplier" />
     <NavigationProperty Name="Customers" Relationship="SuitrohDBModel.FK_Customer_State" FromRole="State" ToRole="Customer" />
-    <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_State" FromRole="State" ToRole="FieldAgent" />
     <NavigationProperty Name="Suppliers" Relationship="SuitrohDBModel.FK_Supplier_State" FromRole="State" ToRole="Supplier" />
-  </EntityType>
-  <EntityType Name="StockIn">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Guid" Nullable="false" />
-    <Property Name="CompanyProductNameId" Type="Guid" Nullable="false" />
-    <Property Name="SupplierId" Type="Guid" Nullable="false" />
-    <Property Name="SupplierProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SuppliedPrice" Type="Decimal" Precision="12" Scale="2" />
-    <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-    <Property Name="QuantitySupplied" Type="Int32" Nullable="false" />
-    <Property Name="DateSupplied" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="PackUnit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedUser" Type="Guid" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Status" Type="Boolean" />
-    <NavigationProperty Name="Audit_StockIn" Relationship="SuitrohDBModel.FK_Audit_StockIn_StockIn" FromRole="StockIn" ToRole="Audit_StockIn" />
-    <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_StockIn_CompanyStockTag" FromRole="StockIn" ToRole="CompanyStockTag" />
-    <NavigationProperty Name="Supplier" Relationship="SuitrohDBModel.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
+    <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_State" FromRole="State" ToRole="FieldAgent" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -355,18 +323,6 @@
       </Principal>
       <Dependent Role="Audit_CompanyStockTag">
         <PropertyRef Name="CompanyStockTagId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Audit_StockIn_StockIn">
-    <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="1" />
-    <End Type="SuitrohDBModel.Audit_StockIn" Role="Audit_StockIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StockIn">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Audit_StockIn">
-        <PropertyRef Name="StockInId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -430,18 +386,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StockIn_CompanyStockTag">
-    <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
-    <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompanyStockTag">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="StockIn">
-        <PropertyRef Name="CompanyProductNameId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Customer_Country">
     <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
     <End Type="SuitrohDBModel.Customer" Role="Customer" Multiplicity="*" />
@@ -450,18 +394,6 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Customer">
-        <PropertyRef Name="CountryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_FieldAgent_Country">
-    <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="1" />
-    <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Country">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="FieldAgent">
         <PropertyRef Name="CountryId" />
       </Dependent>
     </ReferentialConstraint>
@@ -490,18 +422,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_FieldAgent_State">
-    <End Type="SuitrohDBModel.State" Role="State" Multiplicity="1" />
-    <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="State">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="FieldAgent">
-        <PropertyRef Name="StateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SaleReport_Sale">
     <End Type="SuitrohDBModel.Sale" Role="Sale" Multiplicity="1" />
     <End Type="SuitrohDBModel.SaleReport" Role="SaleReport" Multiplicity="*" />
@@ -523,18 +443,6 @@
       </Principal>
       <Dependent Role="Supplier">
         <PropertyRef Name="StateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StockIn_Supplier">
-    <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="1" />
-    <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="StockIn">
-        <PropertyRef Name="SupplierId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -561,18 +469,6 @@
     <Property Name="Description" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_Gender" FromRole="Gender" ToRole="FieldAgent" />
   </EntityType>
-  <Association Name="FK_FieldAgent_Gender">
-    <End Type="SuitrohDBModel.Gender" Role="Gender" Multiplicity="1" />
-    <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Gender">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="FieldAgent">
-        <PropertyRef Name="GenderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="id" />
@@ -658,6 +554,63 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="StockIn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="CompanyProductNameId" Type="Guid" Nullable="false" />
+    <Property Name="SupplierId" Type="Guid" Nullable="false" />
+    <Property Name="SupplierProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SuppliedPrice" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+    <Property Name="QuantitySupplied" Type="Int32" Nullable="false" />
+    <Property Name="DateSupplied" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PackUnit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedUser" Type="Guid" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Audit_StockIn" Relationship="SuitrohDBModel.FK_Audit_StockIn_StockIn" FromRole="StockIn" ToRole="Audit_StockIn" />
+    <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_StockIn_CompanyStockTag" FromRole="StockIn" ToRole="CompanyStockTag" />
+    <NavigationProperty Name="Supplier" Relationship="SuitrohDBModel.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
+  </EntityType>
+  <Association Name="FK_Audit_StockIn_StockIn">
+    <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="1" />
+    <End Type="SuitrohDBModel.Audit_StockIn" Role="Audit_StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StockIn">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Audit_StockIn">
+        <PropertyRef Name="StockInId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_CompanyStockTag">
+    <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
+    <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyStockTag">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="CompanyProductNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_Supplier">
+    <End Type="SuitrohDBModel.Supplier" Role="Supplier" Multiplicity="1" />
+    <End Type="SuitrohDBModel.StockIn" Role="StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="id" />
@@ -669,13 +622,27 @@
     <Property Name="Pending" Type="Boolean" />
     <Property Name="Cancelled" Type="Boolean" />
     <Property Name="TotalOrderAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-    <Property Name="TotalSuppliedAmount" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="TotalSuppliedAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
     <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="OrderTag" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="SuitrohDBModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItem" />
     <NavigationProperty Name="Sales" Relationship="SuitrohDBModel.FK_Sale_Order" FromRole="Order" ToRole="Sale" />
+    <NavigationProperty Name="FieldAgent" Relationship="SuitrohDBModel.FK_Order_FieldAgent" FromRole="Order" ToRole="FieldAgent" />
   </EntityType>
+  <Association Name="FK_Order_Customer">
+    <End Type="SuitrohDBModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_OrderItems_Order">
     <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="1" />
     <End Type="SuitrohDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
@@ -697,6 +664,75 @@
       </Principal>
       <Dependent Role="Sale">
         <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FieldAgent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Guid" Nullable="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Firstname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Othernames" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GenderId" Type="Guid" Nullable="false" />
+    <Property Name="AllocatedZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="CreatedUser" Type="Guid" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_FieldAgent_Country" FromRole="FieldAgent" ToRole="Country" />
+    <NavigationProperty Name="Gender" Relationship="SuitrohDBModel.FK_FieldAgent_Gender" FromRole="FieldAgent" ToRole="Gender" />
+    <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_FieldAgent_State" FromRole="FieldAgent" ToRole="State" />
+    <NavigationProperty Name="Orders" Relationship="SuitrohDBModel.FK_Order_FieldAgent" FromRole="FieldAgent" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_FieldAgent_Country">
+    <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
+    <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FieldAgent">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FieldAgent_Gender">
+    <End Type="SuitrohDBModel.Gender" Role="Gender" Multiplicity="1" />
+    <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FieldAgent">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FieldAgent_State">
+    <End Type="SuitrohDBModel.State" Role="State" Multiplicity="0..1" />
+    <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FieldAgent">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_FieldAgent">
+    <End Type="SuitrohDBModel.FieldAgent" Role="FieldAgent" Multiplicity="1" />
+    <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FieldAgent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="AgentId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

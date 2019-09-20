@@ -12,15 +12,23 @@ namespace BaseWebApi.Controllers
     public class AgentController : ApiController
     {
         private readonly IGenericRepository<FieldAgent> _agentRepository;
+        //private readonly IGenericRepository<User> _userRepository;
 
         public AgentController(IGenericRepository<FieldAgent> agentRepository)
         {
-            _agentRepository = agentRepository;
+            _agentRepository = agentRepository;            
         }
 
         public IQueryable<FieldAgent> Get()
         {
             return _agentRepository.GetAll();
+        }
+
+        [HttpGet]
+        public FieldAgent GetById(Guid id)
+        {            
+            var agent = _agentRepository.GetAll().Where(x => x.id == id).FirstOrDefault();            
+            return agent;
         }
 
         [HttpPost]

@@ -19,8 +19,8 @@ namespace BaseWebApi.Models
         {
             this.Audit_Supplier = new HashSet<Audit_Supplier>();
             this.Customers = new HashSet<Customer>();
-            this.FieldAgents = new HashSet<FieldAgent>();
             this.Suppliers = new HashSet<Supplier>();
+            this.FieldAgents = new HashSet<FieldAgent>();
         }
     
         public int id { get; set; }
@@ -32,8 +32,8 @@ namespace BaseWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FieldAgent> FieldAgents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supplier> Suppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FieldAgent> FieldAgents { get; set; }
     }
 }

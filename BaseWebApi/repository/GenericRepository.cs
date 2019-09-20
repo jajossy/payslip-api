@@ -32,6 +32,12 @@ namespace BaseWebApi.repository
             DbFactory = dbFactory;
         }
 
+        public GenericRepository()
+        {
+            this.dbContext = new SuitrohDBEntities();
+
+        }
+
         public T GetById(Guid id)
         {
             return DbContext.Set<T>().Find(id);

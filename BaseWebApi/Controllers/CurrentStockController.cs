@@ -95,9 +95,31 @@ namespace BaseWebApi.Controllers
 
             // update current stock data
             _currentStockRepository.Update(currentStock);
+
+            // update also to order current stock table to monitor orderings
+            Order_CurrentStock orderCurrentStock = new Order_CurrentStock();
+
+            orderCurrentStock.id = currentStock.id;
+            orderCurrentStock.StockNameId = currentStock.StockNameId;
+            orderCurrentStock.Quantity = currentStock.Quantity;
+            orderCurrentStock.ReorderLevel = currentStock.ReorderLevel;
+            orderCurrentStock.PackUnit = currentStock.PackUnit;
+            orderCurrentStock.CompanyUnitPrice = currentStock.CompanyUnitPrice;
+            orderCurrentStock.SupplierUnitPrice = currentStock.SupplierUnitPrice;
+            orderCurrentStock.Status = currentStock.Status;
+            orderCurrentStock.Comment = currentStock.Comment;
+            orderCurrentStock.CreatedUser = currentStock.CreatedUser;
+
+            // update current stock data
+            _orderCurrentStockRepository.Update(orderCurrentStock);
+
             // update current stock audit tray
             Audit_CurrentStock auditData = auditHelper(currentStock, "Updated");
             var auditEntity = _auditCurrentStockRepository.Add(auditData);
+
+            // update order current stock audit tray
+            Order_Audit_CurrentStock auditData2 = auditHelper2(orderCurrentStock, "Updated");
+            var auditEntity2 = _orderAuditCurrentStockRepository.Add(auditData2);
         }
 
         [HttpDelete]
