@@ -19,10 +19,11 @@ namespace BaseWebApi.Models
         public int Quantity { get; set; }
         public decimal SalesUnitPrice { get; set; }
         public decimal SalesTotalAmount { get; set; }
-        public System.Guid OrderId { get; set; }
+        public Nullable<System.Guid> OrderId { get; set; }
         public string BatchNo { get; set; }
         public decimal SuppliedUnitPrice { get; set; }
         public decimal SuppliedTotalPrice { get; set; }
+        public System.Guid AgentId { get; set; }
     
         public virtual CompanyStockTag CompanyStockTag { get; set; }
         public virtual Order Order { get; set; }

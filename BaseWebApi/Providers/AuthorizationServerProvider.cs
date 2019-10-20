@@ -42,6 +42,7 @@ namespace BaseWebApi.Providers
                     identity.AddClaim(new Claim("username", user.username.ToString()));
                     identity.AddClaim(new Claim(ClaimTypes.Name, user.lastName.ToString() + " " + user.firstName.ToString()));
                     identity.AddClaim(new Claim("UserId", user.id.ToString()));
+                    identity.AddClaim(new Claim("EmployeeId", user.UserId.ToString()));
                     context.Validated(identity);
                 //}
             }

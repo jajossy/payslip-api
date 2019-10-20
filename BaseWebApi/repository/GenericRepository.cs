@@ -109,10 +109,25 @@ namespace BaseWebApi.repository
             return entity;
         }
 
-        public void Remove(T entity)
+        public T Remove(T entity)
         {
             DbContext.Set<T>().Remove(entity);
+            Save();
+            return entity;
         }
+
+        public T RemoveEntity(T entity)
+        {
+            if (entity != null)
+            {
+                var attachedEntry = DbContext.Entry(entity);
+                attachedEntry.State = EntityState.Deleted;
+            }
+            Save();
+            return entity;
+        }
+        
+        
 
         public void Save()
         {

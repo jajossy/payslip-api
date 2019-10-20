@@ -17,8 +17,8 @@ namespace BaseWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderItems = new HashSet<OrderItem>();
             this.Sales = new HashSet<Sale>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
     
         public System.Guid id { get; set; }
@@ -32,12 +32,15 @@ namespace BaseWebApi.Models
         public System.DateTime DateCreated { get; set; }
         public string PaymentType { get; set; }
         public string OrderTag { get; set; }
+        public Nullable<bool> CheckOut { get; set; }
+        public Nullable<System.Guid> ApprovalId { get; set; }
+        public Nullable<System.Guid> CheckerId { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual FieldAgent FieldAgent { get; set; }
     }
 }

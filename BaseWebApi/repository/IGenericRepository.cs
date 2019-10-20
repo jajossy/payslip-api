@@ -12,7 +12,8 @@ namespace BaseWebApi.repository
         IQueryable<T> GetAll(params Expression<Func<T, object>>[] includeExpressions);
         T Add(T entity);
         T Update(T entity);
-        void Remove(T entity);
+        T Remove(T entity);
+        T RemoveEntity(T entity);
 
         //IQueryable<T> Include(params Expression<Func<T, object>>[] includeExpressions);
     }

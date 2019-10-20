@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="SuitrohDBModel.CompanyStockTag" Width="1.5" PointX="6" PointY="22.125" />
         <EntityTypeShape EntityType="SuitrohDBModel.Country" Width="1.5" PointX="3.75" PointY="12.625" />
         <EntityTypeShape EntityType="SuitrohDBModel.Customer" Width="1.5" PointX="9" PointY="11.5" />
-        <EntityTypeShape EntityType="SuitrohDBModel.OrderItem" Width="1.5" PointX="12" PointY="12.375" />
         <EntityTypeShape EntityType="SuitrohDBModel.Sale" Width="1.5" PointX="11" PointY="7" />
         <EntityTypeShape EntityType="SuitrohDBModel.SaleReport" Width="1.5" PointX="13.25" PointY="7" />
         <EntityTypeShape EntityType="SuitrohDBModel.State" Width="1.5" PointX="3.75" PointY="7.5" />
@@ -23,7 +22,6 @@
         <AssociationConnector Association="SuitrohDBModel.FK_Audit_Supplier_Country" />
         <AssociationConnector Association="SuitrohDBModel.FK_Audit_Supplier_State" />
         <AssociationConnector Association="SuitrohDBModel.FK_Audit_Supplier_Supplier" />
-        <AssociationConnector Association="SuitrohDBModel.FK_OrderItems_CompanyStockTag" />
         <AssociationConnector Association="SuitrohDBModel.FK_Customer_Country" />
         <AssociationConnector Association="SuitrohDBModel.FK_Supplier_Country" />
         <AssociationConnector Association="SuitrohDBModel.FK_Customer_State" />
@@ -31,7 +29,6 @@
         <AssociationConnector Association="SuitrohDBModel.FK_Supplier_State" />
         <EntityTypeShape EntityType="SuitrohDBModel.Audit_CurrentStock" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="SuitrohDBModel.Gender" Width="1.5" PointX="11.375" PointY="0.875" />
-        <EntityTypeShape EntityType="SuitrohDBModel.User" Width="1.5" PointX="0.75" PointY="12.75" />
         <EntityTypeShape EntityType="SuitrohDBModel.CurrentStock" Width="1.5" PointX="8.25" PointY="27.125" />
         <AssociationConnector Association="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" />
         <EntityTypeShape EntityType="SuitrohDBModel.Order_Audit_CurrentStock" Width="1.5" PointX="0.75" PointY="3.75" />
@@ -41,11 +38,14 @@
         <AssociationConnector Association="SuitrohDBModel.FK_Audit_StockIn_StockIn" />
         <AssociationConnector Association="SuitrohDBModel.FK_StockIn_CompanyStockTag" />
         <AssociationConnector Association="SuitrohDBModel.FK_StockIn_Supplier" />
-        <EntityTypeShape EntityType="SuitrohDBModel.Order" Width="1.5" PointX="14.25" PointY="11.875" />
+        <EntityTypeShape EntityType="SuitrohDBModel.Order" Width="1.5" PointX="17.875" PointY="8.75" />
         <AssociationConnector Association="SuitrohDBModel.FK_Order_Customer" />
-        <AssociationConnector Association="SuitrohDBModel.FK_OrderItems_Order" />
         <AssociationConnector Association="SuitrohDBModel.FK_Sale_Order" />
+        <EntityTypeShape EntityType="SuitrohDBModel.OrderItem" Width="1.5" PointX="20.125" PointY="15.375" />
+        <AssociationConnector Association="SuitrohDBModel.FK_OrderItems_CompanyStockTag" />
+        <AssociationConnector Association="SuitrohDBModel.FK_OrderItems_Order" />
         <EntityTypeShape EntityType="SuitrohDBModel.FieldAgent" Width="1.5" PointX="15.625" PointY="5.75" />
+        <EntityTypeShape EntityType="SuitrohDBModel.User" Width="1.5" PointX="6.375" PointY="0.75" />
         <AssociationConnector Association="SuitrohDBModel.FK_FieldAgent_Country" />
         <AssociationConnector Association="SuitrohDBModel.FK_FieldAgent_Gender" />
         <AssociationConnector Association="SuitrohDBModel.FK_FieldAgent_State" />

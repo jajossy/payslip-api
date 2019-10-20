@@ -89,7 +89,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/31/2019 13:39:52</publishTime>
     </File>
     <File Include="bin/BaseWebApi.dll">
-      <publishTime>09/18/2019 09:48:32</publishTime>
+      <publishTime>09/21/2019 15:51:17</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>07/31/2019 13:39:52</publishTime>
@@ -338,7 +338,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/16/2019 22:20:04</publishTime>
     </File>
     <File Include="Models/suitrohModel.edmx.diagram">
-      <publishTime>09/17/2019 13:35:14</publishTime>
+      <publishTime>09/21/2019 14:30:44</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>09/13/2019 10:12:26</publishTime>

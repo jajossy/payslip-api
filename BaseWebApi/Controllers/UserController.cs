@@ -56,5 +56,14 @@ namespace BaseWebApi.Controllers
 
             return response;
         }
+
+        [HttpPut]
+        public void Put([FromBody]User user)
+        {
+            if (user == null) throw new ArgumentNullException("agent");
+            user.password = EncryptDecrypt.Encrypt(user.password);
+            // update current stock data
+            _userRepository.Update(user);
+        }
     }
 }

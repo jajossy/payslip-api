@@ -36,7 +36,13 @@ namespace BaseWebApi.Controllers
         public IQueryable<Order> Get()
         {
             //return _orderRepository.GetAll(or => or.Customer, or => or.FieldAgent).Where(p=> p.Pending == true);
-            return _orderRepository.GetAll(or => or.Customer, or => or.FieldAgent);
+            return _orderRepository.GetAll(or => or.Customer, or => or.FieldAgent).Where(p => p.CheckOut == null); ;
+        }
+
+        public IQueryable<Order> GetApproved()
+        {
+            //return _orderRepository.GetAll(or => or.Customer, or => or.FieldAgent).Where(p=> p.Pending == true);
+            return _orderRepository.GetAll(or => or.Customer, or => or.FieldAgent).Where(p => p.Approved == true && p.CheckOut != true); ;
         }
 
         public IQueryable<OrderItem> GetItem()
@@ -57,6 +63,7 @@ namespace BaseWebApi.Controllers
             // update Order data
             orderForUpdate.Approved = true;
             orderForUpdate.Pending = false;
+            orderForUpdate.ApprovalId = id2;
             _orderRepository.Update(orderForUpdate);
 
             // save sales and sales report
@@ -104,6 +111,19 @@ namespace BaseWebApi.Controllers
             return true;
         }
 
+        public bool GetOrderCheckout(Guid id, Guid id2)
+        {
+            var orderForUpdate = _orderRepository.GetAll(c => c.OrderItems).Where(oi => oi.id == id).FirstOrDefault();
+            if (orderForUpdate == null) throw new ArgumentNullException("order");
+
+            // update Order data
+            orderForUpdate.CheckOut = true;            
+            orderForUpdate.CheckerId = id2;
+            _orderRepository.Update(orderForUpdate);           
+
+            return true;
+        }
+
         [HttpPost]
         public HttpResponseMessage Post([FromBody]OrderItem[] orderItems)
         {
@@ -139,7 +159,7 @@ namespace BaseWebApi.Controllers
             orderEntity.TotalOrderAmount = count;
             orderEntity.TotalSuppliedAmount = count2; // included this recently
             //orderEntity.AgentId = Guid.Parse("E836F4E6-86FA-4518-B1DD-5D89A62226F4"); // item orderid holds the agent id - local
-            orderEntity.AgentId = Guid.Parse("EF629817-3DB3-4EF2-901F-202C6C07EFA6");
+            orderEntity.AgentId = orderItems[0].AgentId;
             orderEntity.CustomerId = orderItems[0].id;
             orderEntity.PaymentType = orderItems[0].BatchNo;
             orderEntity.Pending = true;
@@ -190,14 +210,45 @@ namespace BaseWebApi.Controllers
         [HttpDelete]
         public void Delete(Guid id)
         {
-            var order = _orderRepository.GetById(id);
+            var order = _orderRepository.GetAll(or => or.OrderItems).Where(it => it.id == id).FirstOrDefault();
+            
+            //var orderItems = _orderItemRepository.GetAll().Where(it => it.OrderId == order.id);
 
             if (order == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            _orderRepository.Remove(order);
+            // update order current stock accordingly
+            foreach (var ord2 in order.OrderItems)
+            {
+                // Get ordered product from stock
+                var orderCurrentProduct = _orderCurrentRepository.GetAll()
+                    .Where(pd => pd.StockNameId == ord2.ProductId).FirstOrDefault();
+
+                //deduct ordered quantity and update
+                int deletedOrder = ord2.Quantity;
+                int quantityInStock = orderCurrentProduct.Quantity;
+                int balance = quantityInStock + deletedOrder;
+
+                // update current stock in quantity
+                orderCurrentProduct.Quantity = balance;
+                // update order stock
+                _orderCurrentRepository.Update(orderCurrentProduct);
+                
+            }
+
+            // delete order and nullify order items
+            _orderRepository.RemoveEntity(order);
+
+            // delete the nullified order items
+            /*var orderItems = _orderItemRepository.GetAll().Where(it => it.OrderId == null);
+            foreach (var ord3 in orderItems)
+            {
+                // remove the order item after adding up
+                _orderItemRepository.RemoveEntity(ord3);
+            }*/
+
         }
     }
 }

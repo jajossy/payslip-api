@@ -170,6 +170,9 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
           <Property Name="OrderTag" Type="nvarchar" MaxLength="20" />
+          <Property Name="CheckOut" Type="bit" />
+          <Property Name="ApprovalId" Type="uniqueidentifier" />
+          <Property Name="CheckerId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Order_Audit_CurrentStock">
           <Key>
@@ -210,10 +213,11 @@
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="SalesUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="SalesTotalAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" />
           <Property Name="BatchNo" Type="nvarchar" MaxLength="50" />
           <Property Name="SuppliedUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="SuppliedTotalPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="AgentId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -496,7 +500,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItems_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -718,7 +722,6 @@
           <EntitySet Name="CompanyStockTags" EntityType="SuitrohDBModel.CompanyStockTag" />
           <EntitySet Name="Countries" EntityType="SuitrohDBModel.Country" />
           <EntitySet Name="Customers" EntityType="SuitrohDBModel.Customer" />
-          <EntitySet Name="OrderItems" EntityType="SuitrohDBModel.OrderItem" />
           <EntitySet Name="Sales" EntityType="SuitrohDBModel.Sale" />
           <EntitySet Name="SaleReports" EntityType="SuitrohDBModel.SaleReport" />
           <EntitySet Name="States" EntityType="SuitrohDBModel.State" />
@@ -743,10 +746,6 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Audit_Supplier" EntitySet="Audit_Supplier" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderItems_CompanyStockTag" Association="SuitrohDBModel.FK_OrderItems_CompanyStockTag">
-            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
-            <End Role="OrderItem" EntitySet="OrderItems" />
-          </AssociationSet>
           <AssociationSet Name="FK_Customer_Country" Association="SuitrohDBModel.FK_Customer_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="Customer" EntitySet="Customers" />
@@ -769,7 +768,6 @@
           </AssociationSet>
           <EntitySet Name="Audit_CurrentStock" EntityType="SuitrohDBModel.Audit_CurrentStock" />
           <EntitySet Name="Genders" EntityType="SuitrohDBModel.Gender" />
-          <EntitySet Name="Users" EntityType="SuitrohDBModel.User" />
           <EntitySet Name="CurrentStocks" EntityType="SuitrohDBModel.CurrentStock" />
           <AssociationSet Name="FK_CurrentStock_CompanyStockTag" Association="SuitrohDBModel.FK_CurrentStock_CompanyStockTag">
             <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
@@ -799,15 +797,21 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderItems_Order" Association="SuitrohDBModel.FK_OrderItems_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderItem" EntitySet="OrderItems" />
-          </AssociationSet>
           <AssociationSet Name="FK_Sale_Order" Association="SuitrohDBModel.FK_Sale_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="Sale" EntitySet="Sales" />
           </AssociationSet>
+          <EntitySet Name="OrderItems" EntityType="SuitrohDBModel.OrderItem" />
+          <AssociationSet Name="FK_OrderItems_CompanyStockTag" Association="SuitrohDBModel.FK_OrderItems_CompanyStockTag">
+            <End Role="CompanyStockTag" EntitySet="CompanyStockTags" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItems_Order" Association="SuitrohDBModel.FK_OrderItems_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
           <EntitySet Name="FieldAgents" EntityType="SuitrohDBModel.FieldAgent" />
+          <EntitySet Name="Users" EntityType="SuitrohDBModel.User" />
           <AssociationSet Name="FK_FieldAgent_Country" Association="SuitrohDBModel.FK_FieldAgent_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="FieldAgent" EntitySet="FieldAgents" />
@@ -899,10 +903,10 @@
           <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedUser" Type="Guid" />
           <NavigationProperty Name="Audit_CompanyStockTag" Relationship="SuitrohDBModel.FK_Audit_CompanyStockTag_CompanyStockTag" FromRole="CompanyStockTag" ToRole="Audit_CompanyStockTag" />
-          <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_CompanyStockTag" FromRole="CompanyStockTag" ToRole="OrderItem" />
           <NavigationProperty Name="CurrentStocks" Relationship="SuitrohDBModel.FK_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="CurrentStock" />
           <NavigationProperty Name="Order_CurrentStock" Relationship="SuitrohDBModel.FK_Order_CurrentStock_CompanyStockTag" FromRole="CompanyStockTag" ToRole="Order_CurrentStock" />
           <NavigationProperty Name="StockIns" Relationship="SuitrohDBModel.FK_StockIn_CompanyStockTag" FromRole="CompanyStockTag" ToRole="StockIn" />
+          <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_CompanyStockTag" FromRole="CompanyStockTag" ToRole="OrderItem" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -938,22 +942,6 @@
           <NavigationProperty Name="Country" Relationship="SuitrohDBModel.FK_Customer_Country" FromRole="Customer" ToRole="Country" />
           <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_Customer_State" FromRole="Customer" ToRole="State" />
           <NavigationProperty Name="Orders" Relationship="SuitrohDBModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="OrderItem">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="ProductId" Type="Guid" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="SalesUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="SalesTotalAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="OrderId" Type="Guid" Nullable="false" />
-          <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SuppliedUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="SuppliedTotalPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_OrderItems_CompanyStockTag" FromRole="OrderItem" ToRole="CompanyStockTag" />
-          <NavigationProperty Name="Order" Relationship="SuitrohDBModel.FK_OrderItems_Order" FromRole="OrderItem" ToRole="Order" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -1073,18 +1061,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItems_CompanyStockTag">
-          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
-          <End Type="SuitrohDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CompanyStockTag">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderItem">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Customer_Country">
           <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
           <End Type="SuitrohDBModel.Customer" Role="Customer" Multiplicity="*" />
@@ -1167,20 +1143,6 @@
           <Property Name="id" Type="Guid" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="FieldAgents" Relationship="SuitrohDBModel.FK_FieldAgent_Gender" FromRole="Gender" ToRole="FieldAgent" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="CurrentStock">
           <Key>
@@ -1325,9 +1287,12 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OrderTag" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CheckOut" Type="Boolean" />
+          <Property Name="ApprovalId" Type="Guid" />
+          <Property Name="CheckerId" Type="Guid" />
           <NavigationProperty Name="Customer" Relationship="SuitrohDBModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItem" />
           <NavigationProperty Name="Sales" Relationship="SuitrohDBModel.FK_Sale_Order" FromRole="Order" ToRole="Sale" />
+          <NavigationProperty Name="OrderItems" Relationship="SuitrohDBModel.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItem" />
           <NavigationProperty Name="FieldAgent" Relationship="SuitrohDBModel.FK_Order_FieldAgent" FromRole="Order" ToRole="FieldAgent" />
         </EntityType>
         <Association Name="FK_Order_Customer">
@@ -1342,18 +1307,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItems_Order">
-          <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="SuitrohDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderItem">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sale_Order">
           <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="1" />
           <End Type="SuitrohDBModel.Sale" Role="Sale" Multiplicity="*" />
@@ -1362,6 +1315,47 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Sale">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="ProductId" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="SalesUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SalesTotalAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="OrderId" Type="Guid" />
+          <Property Name="BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SuppliedUnitPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SuppliedTotalPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="AgentId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="CompanyStockTag" Relationship="SuitrohDBModel.FK_OrderItems_CompanyStockTag" FromRole="OrderItem" ToRole="CompanyStockTag" />
+          <NavigationProperty Name="Order" Relationship="SuitrohDBModel.FK_OrderItems_Order" FromRole="OrderItem" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_OrderItems_CompanyStockTag">
+          <End Type="SuitrohDBModel.CompanyStockTag" Role="CompanyStockTag" Multiplicity="1" />
+          <End Type="SuitrohDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyStockTag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItems_Order">
+          <End Type="SuitrohDBModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="SuitrohDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItem">
               <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1386,6 +1380,20 @@
           <NavigationProperty Name="Gender" Relationship="SuitrohDBModel.FK_FieldAgent_Gender" FromRole="FieldAgent" ToRole="Gender" />
           <NavigationProperty Name="State" Relationship="SuitrohDBModel.FK_FieldAgent_State" FromRole="FieldAgent" ToRole="State" />
           <NavigationProperty Name="Orders" Relationship="SuitrohDBModel.FK_Order_FieldAgent" FromRole="FieldAgent" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
         </EntityType>
         <Association Name="FK_FieldAgent_Country">
           <End Type="SuitrohDBModel.Country" Role="Country" Multiplicity="0..1" />
@@ -1555,21 +1563,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderItems">
-            <EntityTypeMapping TypeName="SuitrohDBModel.OrderItem">
-              <MappingFragment StoreEntitySet="OrderItems">
-                <ScalarProperty Name="SuppliedTotalPrice" ColumnName="SuppliedTotalPrice" />
-                <ScalarProperty Name="SuppliedUnitPrice" ColumnName="SuppliedUnitPrice" />
-                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="SalesTotalAmount" ColumnName="SalesTotalAmount" />
-                <ScalarProperty Name="SalesUnitPrice" ColumnName="SalesUnitPrice" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="SuitrohDBModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
@@ -1644,21 +1637,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="SuitrohDBModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="token" ColumnName="token" />
-                <ScalarProperty Name="role" ColumnName="role" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CurrentStocks">
             <EntityTypeMapping TypeName="SuitrohDBModel.CurrentStock">
               <MappingFragment StoreEntitySet="CurrentStock">
@@ -1729,6 +1707,9 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="SuitrohDBModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="CheckerId" ColumnName="CheckerId" />
+                <ScalarProperty Name="ApprovalId" ColumnName="ApprovalId" />
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
                 <ScalarProperty Name="OrderTag" ColumnName="OrderTag" />
                 <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -1739,6 +1720,22 @@
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="SuitrohDBModel.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="SuppliedTotalPrice" ColumnName="SuppliedTotalPrice" />
+                <ScalarProperty Name="SuppliedUnitPrice" ColumnName="SuppliedUnitPrice" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SalesTotalAmount" ColumnName="SalesTotalAmount" />
+                <ScalarProperty Name="SalesUnitPrice" ColumnName="SalesUnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1757,6 +1754,21 @@
                 <ScalarProperty Name="Othernames" ColumnName="Othernames" />
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SuitrohDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -138,8 +138,8 @@
     <Property Name="AllocatedZone" Type="nvarchar" MaxLength="50" />
     <Property Name="Remark" Type="nvarchar" MaxLength="100" />
     <Property Name="Status" Type="bit" Nullable="false" />
-    <Property Name="CountryId" Type="int" Nullable="false" />
-    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="StateId" Type="int" />
     <Property Name="CreatedUser" Type="uniqueidentifier" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
   </EntityType>
@@ -165,6 +165,9 @@
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
     <Property Name="OrderTag" Type="nvarchar" MaxLength="20" />
+    <Property Name="CheckOut" Type="bit" />
+    <Property Name="ApprovalId" Type="uniqueidentifier" />
+    <Property Name="CheckerId" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Order_Audit_CurrentStock">
     <Key>
@@ -205,10 +208,11 @@
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="SalesUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
     <Property Name="SalesTotalAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-    <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderId" Type="uniqueidentifier" />
     <Property Name="BatchNo" Type="nvarchar" MaxLength="50" />
     <Property Name="SuppliedUnitPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
     <Property Name="SuppliedTotalPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="AgentId" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="Sale">
     <Key>
@@ -407,7 +411,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FieldAgent_Country">
-    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
     <End Role="FieldAgent" Type="Self.FieldAgent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Country">
@@ -431,7 +435,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FieldAgent_State">
-    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
     <End Role="FieldAgent" Type="Self.FieldAgent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="State">
@@ -491,7 +495,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderItems_Order">
-    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
     <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Order">

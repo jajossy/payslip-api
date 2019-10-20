@@ -25,9 +25,9 @@ namespace BaseWebApi.Controllers
         }
 
         [HttpGet]
-        public FieldAgent GetById(Guid id)
-        {            
-            var agent = _agentRepository.GetAll().Where(x => x.id == id).FirstOrDefault();            
+        public IQueryable<FieldAgent> GetById(Guid id)
+        {
+            var agent = _agentRepository.GetAll().Where(x => x.id == id);           
             return agent;
         }
 
