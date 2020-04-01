@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NominalDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="NominalDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="NominalDataModel.User" />
+    <EntitySet Name="StaffDataLatests" EntityType="NominalDataModel.StaffDataLatest" />
+    <EntitySet Name="Categories" EntityType="NominalDataModel.Category" />
+    <EntitySet Name="SubCategories" EntityType="NominalDataModel.SubCategory" />
+    <EntitySet Name="Payslips" EntityType="NominalDataModel.Payslip" />
+    <AssociationSet Name="FK_Payslip_Category" Association="NominalDataModel.FK_Payslip_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Payslip" EntitySet="Payslips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payslip_SubCategory" Association="NominalDataModel.FK_Payslip_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="Payslip" EntitySet="Payslips" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="StaffDataLatest">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ippis" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Othername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Payslips" Relationship="NominalDataModel.FK_Payslip_Category" FromRole="Category" ToRole="Payslip" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Payslips" Relationship="NominalDataModel.FK_Payslip_SubCategory" FromRole="SubCategory" ToRole="Payslip" />
+  </EntityType>
+  <EntityType Name="Payslip">
+    <Key>
+      <PropertyRef Name="PayslipId" />
+    </Key>
+    <Property Name="PayslipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PayslipMonth" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayslipYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Frequency" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="NominalDataModel.FK_Payslip_Category" FromRole="Payslip" ToRole="Category" />
+    <NavigationProperty Name="SubCategory" Relationship="NominalDataModel.FK_Payslip_SubCategory" FromRole="Payslip" ToRole="SubCategory" />
+  </EntityType>
+  <Association Name="FK_Payslip_Category">
+    <End Type="NominalDataModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="NominalDataModel.Payslip" Role="Payslip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Payslip">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payslip_SubCategory">
+    <End Type="NominalDataModel.SubCategory" Role="SubCategory" Multiplicity="1" />
+    <End Type="NominalDataModel.Payslip" Role="Payslip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Payslip">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

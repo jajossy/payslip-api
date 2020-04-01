@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NominalDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payslip">
+    <Key>
+      <PropertyRef Name="PayslipId" />
+    </Key>
+    <Property Name="PayslipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PayslipMonth" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PayslipYear" Type="nvarchar" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="SubCategoryId" Type="int" Nullable="false" />
+    <Property Name="Frequency" Type="int" />
+  </EntityType>
+  <EntityType Name="StaffDataLatest">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ippis" Type="nvarchar" MaxLength="30" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Firstname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Othername" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="30" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Payslip_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Payslip" Type="Self.Payslip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Payslip">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payslip_SubCategory">
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="1" />
+    <End Role="Payslip" Type="Self.Payslip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Payslip">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NominalDataModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payslip" EntityType="Self.Payslip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffDataLatest" EntityType="Self.StaffDataLatest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Payslip_Category" Association="Self.FK_Payslip_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Payslip" EntitySet="Payslip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payslip_SubCategory" Association="Self.FK_Payslip_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategory" />
+      <End Role="Payslip" EntitySet="Payslip" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
